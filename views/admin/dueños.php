@@ -2,6 +2,9 @@
 
 <?php
 
+
+session_start();
+
 include("../../conexionBD.php");
 require("../../funciones/funcionesSQL.php");
 
@@ -36,15 +39,26 @@ $listaDueños = consultaDueños($conexion);
                 <td> <?= $dueño["fechaRegistro"] ?></td>
                 <td>
                     <form action="../../controllers/activacionDueñoController.php" method="POST">
-                        <input type="hidden" name="id" value="> <?= $dueño['codUsuario']?> ">
+                        <input type="hidden" name="codigoDueño" value="<?= $dueño['codUsuario'] ?>">
+                        <input type="hidden" name="emailDueño" value="<?= $dueño['nombreUsuario']?>">
                         <button type="submit"  name="activar"  class="button-activar">Activar</button>
-                        <button type="submit"  name="bloquear" class="button-bloquear">bloquear</button>                        
+                        <button type="submit"  name="bloquear" class="button-bloquear">Bloquear</button>                        
                     </form>
+
                 </td>
             </tr>
             <?php
+        }                         
+        echo "</table>";        
+        if(isset($_SESSION["mensaje"])){
+            echo "<p style='color: #111';'font-weight: 800;" . $_SESSION['mensaje']. "</p>";
+            unset($_SESSION['mensaje']);
         }
-        echo "</table>";
     endif;?>
 </body>
 </html>
+
+
+<?php
+mysqli_close($conexion);
+?>

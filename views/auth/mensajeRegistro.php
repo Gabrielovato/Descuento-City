@@ -4,7 +4,7 @@ $rol = $_GET['rol'] ?? null;
 $email = $_GET['email'] ?? null;
 $token = $_GET['token'] ?? null;
 
-require '../../controllers/envioMail.php';
+require("../../funciones/funcionesMail.php");
 
 ?>
 
@@ -23,6 +23,8 @@ require '../../controllers/envioMail.php';
         
         <!-- tipoUsuario = cliente -->
         <?php if($rol == "cliente"): 
+
+
         
         //Mando email de confirmacion
         if(enviar_mail($email,$rol,"pendiente",$token)){

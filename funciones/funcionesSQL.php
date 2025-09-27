@@ -26,5 +26,4 @@ function update_estado_SQL($con,$email){
     return $resultado_update;
 }
 
-
 ?>

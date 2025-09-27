@@ -1,6 +1,6 @@
+
+
 <?php
-
-
 
 function enviar_mail($email,$tipoUsuario,$estadoUsuario,$token){
     $destino  = $email;     
@@ -47,7 +47,7 @@ function enviar_mail($email,$tipoUsuario,$estadoUsuario,$token){
         </html>
         ';
     }
-    else{ //Cuenta bloqueada.
+    elseif($tipoUsuario == "dueño" && $estadoUsuario == "bloqueado" ){ //Cuenta bloqueada.
 
         $asunto = 'Estado cuenta - DESCUENTO CITY';
         $cuerpo = '
