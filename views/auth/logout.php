@@ -12,9 +12,29 @@ session_start();
     <title>Document</title>
 </head>
 <body>
+    <!-- tipoUsuario = cliente -->
+    <?php 
+    
+    if($_SESSION["tipoUsuario"] == "cliente"):
+
+    include("../../includes/cliente/clienteHeader.php");
+
+    elseif($_SESSION["tipoUsuario"] == "dueño"): 
+
+    include("../../includes/dueño/dueñoHeader.php");
+
+    elseif($_SESSION["tipoUsuario"] == "admin"):
+
+    include("../../includes/admin/adminHeader.php");
+
+    endif; ?>
+
+
+
+
     <form action="../../controllers/logoutController.php" method="POST">
-        <h2>Cerrar sesion</h2><br>
-        <input type="submit" name="confirm" value="Si">
+        <h2> ¿ Desea cerrar sesion ?</h2><br>
+        <input type="submit" name="confirm" value="Si" class="button-form">
     </form>
 </body>
 </html>

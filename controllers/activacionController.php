@@ -19,6 +19,7 @@ if(!empty($email) && !empty($token)){
     $resulado = consultaSQL($conexion,$email,$token);
     if(mysqli_num_rows($resulado) > 0){
 
+
         //Actualiza datos en BD
         $resultado_update = update_estado_SQL($conexion,$email);
         if($resultado_update){

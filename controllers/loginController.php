@@ -3,21 +3,7 @@
 session_start();
 include("../conexionBD.php");
 
-
-
-function guardar_datos_user($user){
-
-    $_SESSION['codUsuario'] = $user['codUsuario'];
-    $_SESSION['nombreUsuario'] = $user['nombreUsuario'];
-    $_SESSION['tipoUsuario']   = $user['tipoUsuario'];
-    $_SESSION['categoriaCliente'] = $user['categoriaCliente'];
-    $_SESSION['estadoUsuario'] = $user['estadoUsuario'];
-    $_SESSION['fechaRegistro'] = $user['fechaRegistro'];
-
-
-}
-
-
+// Verifico si solicitud http se realizo utilizando POST y si se presiono el input confirm
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])) {
     if (!empty($_POST["email"]) && !empty($_POST["clave"])) {
         $email = $_POST["email"];
@@ -26,10 +12,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])) {
         // Busco usuario por EMAIL en BD
         $consulta_user = "SELECT * FROM usuarios WHERE nombreUsuario = '$email'";
         $resultado = mysqli_query($conexion, $consulta_user);
+
+
+        //LLamo archivo donde esta guardar_datos_user()
+        require("../funciones/funcionLogin.php");
         
        
-
-
         if ($resultado && mysqli_num_rows($resultado) > 0) {
             $usuario = mysqli_fetch_assoc($resultado);
             // Comparo la clave ingresada con la clave hash de la BD
