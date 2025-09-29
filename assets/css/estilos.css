@@ -34,9 +34,13 @@ body {
     background-color: #1a237f;
 }
 
+.header__nav a {
+    color: #eee;
+}
+
 a {
     text-decoration: none;
-    color: #eee;
+    color: #0778e9;
     margin-right: 30px;
 }
 

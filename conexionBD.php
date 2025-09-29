@@ -6,7 +6,7 @@ try{
 
 }
 catch(mysqli_sql_exception){
-    echo "Ocurrio un error...";
+    echo "Ocurrio un error al conectar base de datos...";
 }
 
 ?>
