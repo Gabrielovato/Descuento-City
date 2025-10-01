@@ -28,6 +28,8 @@ include("../../conexionBD.php");
                 <!-- Contraseña Usuario -->
                     <label>Contraseña</label><br>
                     <input type="password" name="clave" class="input-form" required ><br> 
+                    <label>Confirma tu contraseña</label><br>
+                    <input type="password" name="claveConfirm" class="input-form" required ><br> 
                 </div>
                 <!-- Rol de usuario -->
                 <div class ="rol-container">
@@ -39,7 +41,7 @@ include("../../conexionBD.php");
             </form>
             <?php
             if(isset($_SESSION["mensaje"])){
-                echo "<p style='color:red'>" . $_SESSION['mensaje']. "</p>";
+                echo "<p style='color:black'>" . $_SESSION['mensaje']. "</p>";
                 unset($_SESSION['mensaje']);
             }
             ?>

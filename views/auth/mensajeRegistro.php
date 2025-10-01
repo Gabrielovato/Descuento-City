@@ -28,8 +28,8 @@ require("../../funciones/funcionesMail.php");
         
         //Mando email de confirmacion
         if(enviar_mail($email,$rol,"pendiente",$token)){
-            echo "Se envio email a $email. Por favor revisa tu bandeja de entrada.";
-            echo "Puedes cerrar esta ventana si lo desea.";
+            echo "Se envio email a $email. Por favor revisa tu bandeja de entrada. <br>";
+            echo "Puedes cerrar esta ventana si lo desea.<br>";
         }
         else{
             echo "Hubo un error en mandar email.";
