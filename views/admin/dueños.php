@@ -41,11 +41,14 @@ $listaDueños = consultaDueños($conexion);
                     <form action="../../controllers/activacionDueñoController.php" method="POST">
                         <input type="hidden" name="codUsuario" value="<?= $dueño['codUsuario'] ?>">
                         <input type="hidden" name="nombreUsuario" value="<?= $dueño['nombreUsuario']?>">
+                        <!-- Si dueño = pendiente -->
                         <?php if($dueño["estadoUsuario"] == 'pendiente'): ?>
                             <button type="submit"  name="activar"  class="button-activar">Activar</button>
-                            <button type="submit"  name="bloquear" class="button-bloquear">Bloquear</button>  
+                            <button type="submit"  name="bloquear" class="button-bloquear">Bloquear</button>
+                            <!-- Si dueño = activo -->
                         <?php elseif($dueño["estadoUsuario"] == 'activo'):  ?>
                             <button type="submit"  name="bloquear" class="button-bloquear">Bloquear</button>
+                            <!-- Si dueño = bloqueado-->
                         <?php elseif($dueño["estadoUsuario"] == 'bloqueado'):  ?>
                             <button type="submit"  name="activar" class="button-activar">Activar</button>
                         <?php endif; ?>

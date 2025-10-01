@@ -10,10 +10,10 @@ include("../conexionBD.php");
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])) {
 
     //coloco datos del post en variables
-    $email = filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL);
-    $clave = filter_input(INPUT_POST,"clave",FILTER_SANITIZE_SPECIAL_CHARS);
-    $claveConfirm = filter_input(INPUT_POST,"claveConfirm",FILTER_SANITIZE_SPECIAL_CHARS);
-    $rol = filter_input(INPUT_POST,"rol",FILTER_SANITIZE_SPECIAL_CHARS);
+    $email = trim(filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL));
+    $clave = trim(filter_input(INPUT_POST,"clave",FILTER_SANITIZE_SPECIAL_CHARS));
+    $claveConfirm = trim(filter_input(INPUT_POST,"claveConfirm",FILTER_SANITIZE_SPECIAL_CHARS));
+    $rol = trim(filter_input(INPUT_POST,"rol",FILTER_SANITIZE_SPECIAL_CHARS));
     //hasher contraseña antes de guardar
     $hash = password_hash($clave , PASSWORD_DEFAULT);
 
