@@ -11,14 +11,13 @@ function consultaSQL($con,$email,$token){
 }
 
 
-//Consulto : tipoUsuario ="dueños" | estadoUsuario="pendiente";
+//Consulto : tipoUsuario ="dueños" | estadoUsuario="pendiente/activo/bloquedo" ordenados . DESC para que aparezca el mas reciente primero 
 function consultaDueños($con){
-    $consultaDueños = "SELECT * FROM usuarios WHERE  tipoUsuario='dueño' AND estadoUsuario='pendiente'";
+    $consultaDueños = "SELECT * FROM usuarios WHERE  tipoUsuario='dueño' ORDER BY FIELD(estadoUsuario, 'pendiente', 'activo', 'bloqueado') , fechaRegistro DESC";
     $resultado = mysqli_query($con,$consultaDueños);
     return $resultado;
 
 }
-
 // Actualizar estado pendiente -> activo.
 function update_estado_SQL($con,$email){
     $consulta_update = "UPDATE usuarios SET estadoUsuario='activo', token=NULL  WHERE nombreUsuario='$email'";

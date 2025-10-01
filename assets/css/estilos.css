@@ -26,7 +26,7 @@ body {
     display: inline;
     list-style: none;
     color: aliceblue;
-    font-weight: 800;
+    font-weight:600;
     
 } 
 
@@ -43,8 +43,6 @@ a {
     color: #0778e9;
     margin-right: 30px;
 }
-
-
 
 
 
@@ -94,11 +92,11 @@ a {
 /* Tabla dueños */
 
 .tabla__dueños{
-    margin: 10px;
+    margin: 20px;
 }
 
 table , th , td {
-    border: 1px solid #111;
+    border: 1px solid #777;
     border-collapse: collapse;
 }
 

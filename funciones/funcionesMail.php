@@ -35,17 +35,23 @@ function enviar_mail($email,$tipoUsuario,$estadoUsuario,$token){
 
     }
     elseif($tipoUsuario == "dueño" && $estadoUsuario == "activo" ){ //tipo de usuario es DUEÑO
-
         $asunto = 'Estado cuenta - DESCUENTO CITY';
-        $cuerpo = '
+        $cuerpo = "
         <html>
             <body>
                 <h1>Descuento City</h1>
                 <p>Tu cuenta ya fue activada por el administrador.</p>
                 <p>Ya puedes iniciar sesion en el sitio.</p>
+                <a href='http://localhost/Descuento-City/views/auth/login.php' style='
+                    display:inline-block;
+                    padding:10px 20px;
+                    background-color:#007bff;
+                    color:white;
+                    text-decoration:none;
+                    border-radius:5px;'>Iniciar sesion</a>
             </body>
         </html>
-        ';
+        ";
     }
     elseif($tipoUsuario == "dueño" && $estadoUsuario == "bloqueado" ){ //Cuenta bloqueada.
 
@@ -54,7 +60,7 @@ function enviar_mail($email,$tipoUsuario,$estadoUsuario,$token){
         <html>
             <body>
                 <h1>Descuento City</h1>
-                <p>Tu cuenta se encuentra BLOQUEADA.</p>
+                <p>Tu cuenta fue BLOQUEADA.</p>
             </body>
         </html>
         ';
