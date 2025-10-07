@@ -22,6 +22,13 @@ body {
 /* Header */
 
 
+.header{
+    background-color: #1a237f;
+}
+
+
+
+
 .header__nav-item{
     display: inline;
     list-style: none;
@@ -30,13 +37,10 @@ body {
     
 } 
 
-.header{
-    background-color: #1a237f;
-}
-
 .header__nav a {
     color: #eee;
 }
+
 
 a {
     text-decoration: none;
@@ -129,6 +133,37 @@ th , td {
     border: none;
     cursor: pointer;
 }
+
+
+/* Creacion Locales */
+
+
+.form__container-l{
+    background-color: #eee;
+    width: 280px;
+    height: 300px;
+    border-radius: 12px;
+    align-content: center;
+}
+
+.form-locales input {
+    padding: 6px 12px;
+    margin: 4px;
+    border-radius: 4px;
+    border: 1px solid #666;
+}
+.form-locales input[type="submit"]{
+    background-color: #3B82F6;
+    width: 120px;
+    padding: 6px 12px;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+}
+
+
+
+
 
 
 

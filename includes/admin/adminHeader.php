@@ -17,6 +17,7 @@
         <nav class="header__nav">
             <ul class="header__nav-list">
                 <li class="header__nav-item"><a href="/Descuento-City/views/admin/dueños.php">Dueños</a></li>
+                <li class="header__nav-item"><a href="/Descuento-City/views/admin/locales.php">Locales</a></li>
                 <li class="header__nav-item"><a href="#contacto">Promociones</a></li>
                 <li class="header__nav-item"><a href="#contacto">Novedades</a></li>
                 <li class="header__nav-item"><a href="#contacto">Reportes</a></li>
