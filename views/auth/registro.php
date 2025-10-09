@@ -20,7 +20,7 @@ include("../../conexionBD.php");
     <div class="main-center">
         <div class="form__container-reg">
             <h3>Registrarse</h3>
-            <form action="../../controllers/registroController.php" method="POST">
+            <form action="../../controllers/registroController.php" method="POST" >
                 <!-- Email -->
                 <div class="datos-container"> 
                     <label>Email</label><br>

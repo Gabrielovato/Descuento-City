@@ -12,7 +12,7 @@ body {
     text-align: center;
     flex-direction: column;
     margin: 0;
-    background-color: #F5F5F5;
+    background-color: #F3F4F6;
 
 }
 
@@ -23,30 +23,57 @@ body {
 
 
 .header{
-    background-color: #1a237f;
+    background-color: #0F172A;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 32px;
 }
 
 
+.header_log-container{
+    flex: 0 0 auto;
 
+}
 
-.header__nav-item{
-    display: inline;
+.header__nav{
+    flex : 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.header__nav-list{
+    display: flex;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
     list-style: none;
-    color: aliceblue;
-    font-weight:600;
-    
-} 
+    justify-content: center;
+    flex: 1;
+}
 
-.header__nav a {
+
+.header__nav-item a{
+    font-weight: 600;
     color: #eee;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.header__nav-item a:hover{
+    opacity: .6;
 }
 
 
 a {
     text-decoration: none;
     color: #0778e9;
-    margin-right: 30px;
 }
+
+
 
 
 
@@ -74,7 +101,7 @@ a {
 .form__container-reg{
     background-color: #eee;
     width: 240px;
-    height: 300px;
+    height: 350px;
     border-radius: 8px;
 }
 
@@ -83,10 +110,17 @@ a {
     display: inline-block;
     margin-bottom: 16px;
     padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #666;
 }
 
 .button-form{
-    padding: 2px 12px;
+    margin-top: 5px;
+    padding: 6px 14px;
+    background-color:#3B82F6 ;
+    color: #eee;
+    border: none;
+    border-radius: 5px;
 }
 
 
@@ -165,11 +199,58 @@ th , td {
 
 
 
+/* Carrusel */
+
+.carrusel{
+    width: 100%;
+    background-color: #43A047;
+    height: 50vh;
+}
+
+/* Home*/
+
+
+.card{
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background-color: #0778e9;
+    margin: 3px;
+    border-radius: 6px;
+    align-content: center;
+
+}
+
+/* Home locales */
+
+
+/* Home promociones */
+
+
+/* Home novedades */
+
+
+/* Home servicios */
+
+.card-servicios{
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #0778e9;
+    align-content: center;
+}
 
 
 
 
+/* FOOTER */
 
-
-
-
+footer{
+    background-color: #0F172A;
+    color: #eee;
+    width: 100%;
+    height: 20vh;
+    align-content: center;
+    margin-top: auto;
+}

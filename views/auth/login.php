@@ -26,7 +26,9 @@ include("../../conexionBD.php");
                     <input type="password" name="clave" class="input-form" placeholder="Contraseña" required ><br> 
                 </div>
                 <input type="submit" name="confirm" value="Iniciar Sesion" class="button-form">
+                <p>¿No tiene cuenta? <a href="/Descuento-City/views/auth/registro.php">Crear una.</a></p>
             </form>
+
             <?php
             if(isset($_SESSION["mensaje"])){
                 echo "<p style='color:red'>" . $_SESSION['mensaje']. "</p>";
