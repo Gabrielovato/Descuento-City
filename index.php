@@ -29,6 +29,8 @@ include("conexionBD.php");
         <div class="card local-card">local</div>
         <div class="card local-card">local</div>
         <div class="card local-card">local</div>
+        <div class="card local-card">local</div>
+        <div class="card local-card">local</div>
     </section>
     <section class="promociones" id="promociones" id="novedades">
         <h2>Promociones Y novedades</h2>
