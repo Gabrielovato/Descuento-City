@@ -28,28 +28,28 @@ $listaDueños = consultaDueños($conexion);
 
         echo "<table class='tabla__dueños'>";
         echo "<caption>Solicitudes de Dueños</caption>";
-        echo "<tr><th>ID</th><th>Nombre</th><th>Estado</th><th>Fecha registro</th><th>Activar/bloquear</th><tr";
+        echo "<tr><th>ID</th><th>Nombre</th><th>Estado</th><th>Fecha registro</th><th>Activar/Eliminar</th><tr";
         
         while($dueño = mysqli_fetch_assoc($listaDueños)){
             ?>
             <tr>
                 <td> <?= $dueño["codUsuario"]    ?></td>
                 <td> <?= $dueño["nombreUsuario"] ?></td>
-                <td> <?= $dueño["estadoUsuario"] ?></td>
+                <td> <?= ucfirst($dueño["estadoUsuario"]) ?></td>
                 <td> <?= $dueño["fechaRegistro"] ?></td>
                 <td>
-                    <form action="../../controllers/activacionDueñoController.php" method="POST">
+                    <form action="../../controllers/dueñosCtrl/activacionDueñoController.php" method="POST">
                         <input type="hidden" name="codUsuario" value="<?= $dueño['codUsuario'] ?>">
                         <input type="hidden" name="nombreUsuario" value="<?= $dueño['nombreUsuario']?>">
                         <!-- Si dueño = pendiente -->
                         <?php if($dueño["estadoUsuario"] == 'pendiente'): ?>
                             <button type="submit"  name="activar"  class="button-activar">Activar</button>
-                            <button type="submit"  name="bloquear" class="button-bloquear">Bloquear</button>
+                            <button type="submit"  name="eliminar" class="button-eliminar">Eliminar</button>
                             <!-- Si dueño = activo -->
                         <?php elseif($dueño["estadoUsuario"] == 'activo'):  ?>
-                            <button type="submit"  name="bloquear" class="button-bloquear">Bloquear</button>
-                            <!-- Si dueño = bloqueado-->
-                        <?php elseif($dueño["estadoUsuario"] == 'bloqueado'):  ?>
+                            <button type="submit"  name="eliminar" class="button-eliminar">Eliminar</button>
+                            <!-- Si dueño = eliminado -->
+                        <?php elseif($dueño["estadoUsuario"] == 'eliminado'):  ?>
                             <button type="submit"  name="activar" class="button-activar">Activar</button>
                         <?php endif; ?>
                     </form>

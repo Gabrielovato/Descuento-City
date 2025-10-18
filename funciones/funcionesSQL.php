@@ -18,6 +18,14 @@ function consultaDueños($con){
     return $resultado;
 
 }
+
+
+function consultaLocales($con){
+    $consultaLocales = "SELECT * FROM locales";
+    $resultado = mysqli_query($con,$consultaLocales);
+    return $resultado;
+}
+
 // Actualizar estado pendiente -> activo.
 function update_estado_SQL($con,$email){
     $consulta_update = "UPDATE usuarios SET estadoUsuario='activo', token=NULL  WHERE nombreUsuario='$email'";

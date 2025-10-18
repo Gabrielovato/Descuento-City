@@ -17,8 +17,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])) {
     //hasher contraseña antes de guardar
     $hash = password_hash($clave , PASSWORD_DEFAULT);
 
-    //Verifico que POST no esten vacios.
-    if(!empty($_POST["email"]) && !empty($_POST["clave"]) && !empty($_POST["claveConfirm"]) && !empty($_POST["rol"])){
+    //Verifico que POST no este
+    if(!empty($email) && !empty($clave) && !empty($claveConfirm) && !empty($rol)){
 
         //Controlo que contraseña y contraseña confirmacion sean iguales
         if($clave == $claveConfirm){

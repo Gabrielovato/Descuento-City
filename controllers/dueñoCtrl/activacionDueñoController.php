@@ -23,13 +23,13 @@ if(isset($_POST["activar"])){
     }
     
 }
-elseif(isset($_POST["bloquear"])){
-    $consultaUpdate = "UPDATE usuarios SET estadoUsuario='bloqueado' WHERE codUsuario ='$codUsuario'";
+elseif(isset($_POST["eliminar"])){
+    $consultaUpdate = "UPDATE usuarios SET estadoUsuario='eliminado' WHERE codUsuario ='$codUsuario'";
     $resultado = mysqli_query($conexion,$consultaUpdate);
     if($resultado){
-        $_SESSION["mensaje"] = " Cuenta de dueño bloqueada .";
+        $_SESSION["mensaje"] = " Cuenta de dueño eliminada .";
         require("../funciones/funcionesMail.php");
-        enviar_mail($nombreUsuario,"dueño","bloqueado",NULL);        
+        enviar_mail($nombreUsuario,"dueño","eliminado",NULL);        
         header("location:../views/admin/dueños.php");
         exit();
     }

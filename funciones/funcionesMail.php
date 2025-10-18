@@ -53,7 +53,7 @@ function enviar_mail($email,$tipoUsuario,$estadoUsuario,$token){
         </html>
         ";
     }
-    elseif($tipoUsuario == "dueño" && $estadoUsuario == "bloqueado" ){ //Cuenta bloqueada.
+    elseif($tipoUsuario == "dueño" && $estadoUsuario == "eliminado" ){ //Cuenta eliminada.
 
         $asunto = 'Estado cuenta - DESCUENTO CITY';
         $cuerpo = '
