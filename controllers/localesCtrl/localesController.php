@@ -14,6 +14,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
     $ubicacionLocal = filter_input(INPUT_POST,"ubicacionLocal",FILTER_SANITIZE_SPECIAL_CHARS);
     $imgLocal = $_POST["imgLocal"];
 
+    
+
     if(!empty($codDueño) &&
         !empty($nombreLocal) &&
         !empty($rubroLocal) &&
