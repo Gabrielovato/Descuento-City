@@ -3,8 +3,11 @@
 session_start();
 
 include("../../conexionBD.php");
-include("../../funciones/funcionesSQL.php");
 
+require("../../funciones/funcionesSQL.php");
+
+
+$codLocal = $_POST["codLocal"] ?? '';
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
 
@@ -14,75 +17,127 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
     $ubicacionLocal = filter_input(INPUT_POST,"ubicacionLocal",FILTER_SANITIZE_SPECIAL_CHARS);
     $imgLocal = $_POST["imgLocal"];
     
-
-
-
     if(!empty($codDueño) &&
         !empty($nombreLocal) &&
         !empty($rubroLocal) &&
-        !empty($ubicacionLocal) &&
-        !empty($imgLocal)){
+        !empty($ubicacionLocal)){
 
-            $listaLocales = consultaLocales($conexion);
-            $listaDueños  = consultaDueños($conexion);
+            $verificarLocal = "SELECT * FROM locales WHERE nombreLocal='$nombreLocal' OR ubicacionLocal='$ubicacionLocal'";
 
-            $dueños = mysqli_fetch_assoc($listaDueños);
-            $local = mysqli_fetch_assoc($listaLocales);
+            $resultadoLocal = mysqli_query($conexion,$verificarLocal);
 
-            if($codDueño == $dueños["codUsuario"]){
+            $consultaDueño = "SELECT * FROM usuarios WHERE codUsuario='$codDueño' AND tipoUsuario='dueño'";
 
-                if($nombreLocal != $local["nombreLocal"]){
+            $resultado = mysqli_query($conexion,$consultaDueño);
 
-                    if($ubicacionLocal != $local["ubicacionLocal"]){
-
-                        if($imgLocal != $local["ImgLocal"]){
+            
 
 
-                            
+            if(mysqli_num_rows($resultado) > 0){
 
+                //si existe dueño
 
+                $dueño = mysqli_fetch_assoc($resultado);
 
+                if(!mysqli_num_rows($resultadoLocal) > 0){            
 
+                    $local = mysqli_fetch_assoc($resultadoLocal);
 
+                    $consulta = "INSERT INTO locales (nombreLocal,ubicacionLocal,rubroLocal,codUsuario) VALUES ('$nombreLocal','$ubicacionLocal','$rubroLocal','$codDueño')";
 
-                        }
-                        else{
-                            $_SESSION['mensaje'] = "Logo ya en uso... ";
-                        }
+                    $resultado = mysqli_query($conexion,$consulta);
 
+                    if($resultado){
+                        $_SESSION['mensaje'] = "Local creado con exito... ";
+                        header("location:../../views/admin/locales.php");
+                        exit();
 
                     }
                     else{
-                        $_SESSION['mensaje'] = "Ubicacion no disponible.. ";
+                        $_SESSION['mensaje'] = " Error al crear local ";
+                        header("location:../../views/admin/locales.php");
+                        exit();
                     }
 
 
                 }
                 else{
-                    $_SESSION['mensaje'] = "Nombre de local ya existente... ";
+                    $_SESSION['mensaje'] = "Nombre de local o ubicacion ya existente... ";
+                    header("location:../../views/admin/locales.php");
+                    exit();
                 }
 
             }
             else{
                 $_SESSION['mensaje'] = "Codigo de dueño no existe...";
-            }
-
-
-
-
-
-
-
-
-
-    }else{
+                header("location:../../views/admin/locales.php");
+                exit();
+               }
+    }
+    else{
         $_SESSION['mensaje'] = "⚠️ Complete todos los datos..";
+        header("location:../../views/admin/locales.php");
+        exit();
+    }
+
+}
+elseif($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["activar"])){
+
+
+    $consulta = "UPDATE locales SET estadoLocal ='activo' WHERE codLocal='$codLocal'";
+
+    $resultado = mysqli_query($conexion,$consulta);
+
+    if($resultado){
+
+        $_SESSION['mensaje'] = "Local activado correctamente";
+        header("location:../../views/admin/locales.php");
+        exit();
+    }
+    else{
+
+        $_SESSION['mensaje'] = "Error al activar local";
+        header("location:../../views/admin/locales.php");
+        exit();
     }
 
 
 
 
+}
+elseif($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["eliminar"])){
+
+
+    $consulta = "UPDATE locales SET estadoLocal ='eliminado' WHERE codLocal='$codLocal'";
+
+    $resultado = mysqli_query($conexion,$consulta);
+
+
+
+    if($resultado){
+
+        $_SESSION['mensaje'] = "Local eliminado correctamente.";
+        header("location:../../views/admin/locales.php");
+        exit();
+
+    }else{
+
+        $_SESSION['mensaje'] = "Error al eliminar local";
+        header("location:../../views/admin/locales.php");
+        exit();
+
+    }
+
+    
 
 }
+elseif($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["editar"])){
+
+    header("location: ../../views/admin/locales/localUpdate.php");
+    exit();
+}
+
+
+mysqli_close($conexion);
 
 ?>

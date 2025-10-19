@@ -24,8 +24,8 @@ $listaDueños = consultaDueños($conexion);
     <?php include("../../includes/admin/adminHeader.php");?>
     <?php 
     if(!empty($listaDueños)):
-        //Lista dueños pendientes.
 
+        //Lista dueños pendientes.
         echo "<table class='tabla__dueños'>";
         echo "<caption>Solicitudes de Dueños</caption>";
         echo "<tr><th>ID</th><th>Nombre</th><th>Estado</th><th>Fecha registro</th><th>Activar/Eliminar</th><tr";
@@ -38,7 +38,7 @@ $listaDueños = consultaDueños($conexion);
                 <td> <?= ucfirst($dueño["estadoUsuario"]) ?></td>
                 <td> <?= $dueño["fechaRegistro"] ?></td>
                 <td>
-                    <form action="../../controllers/dueñosCtrl/activacionDueñoController.php" method="POST">
+                    <form action="../../controllers/dueñoCtrl/activacionDueñoController.php" method="POST">
                         <input type="hidden" name="codUsuario" value="<?= $dueño['codUsuario'] ?>">
                         <input type="hidden" name="nombreUsuario" value="<?= $dueño['nombreUsuario']?>">
                         <!-- Si dueño = pendiente -->

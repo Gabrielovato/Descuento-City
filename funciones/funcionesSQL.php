@@ -19,12 +19,30 @@ function consultaDueños($con){
 
 }
 
+/*
+//Actualizo estado de local.
+function update_estado($con,$accion,$codigo){
+
+    if($accion == 'activar'){
+        $consulta = "UPDATE locales SET estadoLocal='activo' WHERE codLocal ='$codigo'";
+    }
+    else{
+        $consulta ="UPDATE locales SET estadoLocal='eliminado' WHERE codLocal ='$codigo'";
+    }
+
+    $resultado = mysqli_query($con,$consulta);
+    return $resultado;
+
+}
+*/
 
 function consultaLocales($con){
     $consultaLocales = "SELECT * FROM locales";
     $resultado = mysqli_query($con,$consultaLocales);
     return $resultado;
 }
+
+
 
 // Actualizar estado pendiente -> activo.
 function update_estado_SQL($con,$email){

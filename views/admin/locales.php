@@ -34,15 +34,17 @@ require("../../funciones/funcionesSQL.php");
                 <td> <?= $fila["ubicacionLocal"]?></td>
                 <td> <?= $fila["rubroLocal"]?></td>
                 <td> <?= $fila["codUsuario"]?></td>
-                <td> <?= $fila["estadoLocal"]?></td>
+                <td> <?= ucfirst($fila["estadoLocal"])?></td>
                 <td>
-                    <form action="../../controllers/localesCtrl/localesControllers.php" method="POST">
+                    <form action="../../controllers/localesCtrl/localesController.php" method="POST">
                         <!-- Si local esta eliminado -->
                         <?php if($fila["estadoLocal"] == 'eliminado' ):?>
+                            <input type="hidden" name="codLocal" value="<?= $fila["codLocal"] ?>">
                             <button type="submit" name="activar" class="button-activar">Activar</button>
 
                         <!-- Si local esta activo, Permitir editar o eliminar -->
                         <?php elseif($fila["estadoLocal"] == 'activo' ):?>
+                            <input type="hidden" name="codLocal" value="<?= $fila["codLocal"] ?>">
                             <button type="submit" name="editar" class="button-editar">Editar</button>
                             <button type="submit" name="eliminar" class="button-eliminar">Eliminar</button>
 
