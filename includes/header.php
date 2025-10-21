@@ -20,7 +20,7 @@
                 <li class="header__nav-item"><a href="#locales">Locales</a></li>
                 <li class="header__nav-item"><a href="#promociones">Promociones</a></li>
                 <li class="header__nav-item"><a href="#novedades">Novedades</a></li>
-                <li class="header__nav-item"><a href="#contacto">Contacto</a></li>
+                <li class="header__nav-item"><a href="/Descuento-City/contacto.php">Contacto</a></li>
                 <li class="header__nav-item login"><a href="/Descuento-City/views/auth/login.php">Inicio Sesion</a></li>
             </ul>  
         </nav>
