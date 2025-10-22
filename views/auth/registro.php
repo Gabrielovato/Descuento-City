@@ -19,7 +19,7 @@ include("../../conexionBD.php");
     <?php include("../../includes/header.php");?>
     <div class="main-center">
         <div class="form__container-reg">
-            <h3>Registrarse</h3>
+            <h2>Registrarse</h2>
             <form action="../../controllers/registroController.php" method="POST" >
                 <!-- Email -->
                 <div class="datos-container"> 
@@ -34,10 +34,12 @@ include("../../conexionBD.php");
                 <!-- Rol de usuario -->
                 <div class ="rol-container">
                     <label>Rol</label><br>
-                    <input type="radio" name="rol" value="cliente" >Cliente<br>
-                    <input type="radio" name="rol" value="dueño">Dueño de local<br>
+                    <input class="input-radio" type="radio" name="rol" value="cliente" >Cliente<br>
+                    <input class="input-radio" type="radio" name="rol" value="dueño">Dueño de local<br>
                 </div>
                 <input type="submit" name="confirm" value="Registrarse" class="button-form">
+                <p>¿Ya estas registrado?</p>
+                <button class="button-form-login"><a href="/Descuento-City/views/auth/login.php">Iniciar Sesion</a></button>
             </form>
             <?php
             if(isset($_SESSION["mensaje"])){
