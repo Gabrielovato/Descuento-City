@@ -4,6 +4,9 @@
 
 include("conexionBD.php");
 
+$sql_locales = "SELECT * FROM locales WHERE estadoLocal = 'activo' LIMIT 6"; 
+$resultado_locales = mysqli_query($conexion, $sql_locales);
+
 
 ?>
 <!DOCTYPE html>
@@ -38,14 +41,23 @@ include("conexionBD.php");
     <section class="locales" id="locales">
         
         <h2>Locales</h2>
-        <div class="card local-card">local</div>
-        <div class="card local-card">local</div>
-        <div class="card local-card">local</div>
-        <div class="card local-card">local</div>
-        <div class="card local-card">local</div>
-        <div class="card local-card">local</div>
-        <div class="card local-card">local</div>
-        <div class="card local-card">local</div>
+
+        <?php
+        if ($resultado_locales && mysqli_num_rows($resultado_locales) > 0) {
+            while ($local = mysqli_fetch_assoc($resultado_locales)) {
+                echo '<div class="card local-card">';
+                echo '<h3>' . htmlspecialchars($local['nombreLocal']) . '</h3>';
+                echo '<p>' . htmlspecialchars($local['ubicacionLocal']) . '</p>';
+                echo '</div>';
+
+            }
+            
+        } else { 
+            echo "<p>No hay locales disponibles en este momento.</p>";
+        }
+        ?>
+    </section>
+
     </section>
     <section class="promociones" id="promociones" id="novedades">
         <h2>Promociones Y novedades</h2>
