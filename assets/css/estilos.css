@@ -342,14 +342,13 @@ img {
 .carrusel .carousel-item img,
 .carrusel img {
     display: block;
-    width: 100%;
+    width: 100% !important;
     height: 100%;
     object-fit: cover; /* recorta la imagen manteniendo su aspecto */
-    border-radius: 12px;
+    border-radius: 0 !important;
 }
 
 /* Home*/
-
 
 .card{
     display: inline-block;
