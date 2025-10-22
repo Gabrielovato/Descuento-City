@@ -85,9 +85,19 @@ a {
     color: #007BFF;
 }
 
+/*Imagenes*/
+img {
+    max-width: 100%;
+    height: auto;
+}
 
+/*Carrusel*/
 
-
+.carrusel img {
+    border-radius: 12px;
+    height: 32vh;
+    object-fit: cover;
+}
 /* Formularios */
 
 .button-form{
@@ -301,6 +311,27 @@ table , th , td {
     width: 100%;
     background-color: #43A047;
     height: 32vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.carrusel .container,
+.carrusel .container-fluid {
+    height: 100%;
+    padding: 0; /* quitar padding para que la imagen llegue a los bordes */
+}
+.carrusel .carousel-inner,
+.carrusel .carousel-item {
+    height: 100%;
+}
+
+.carrusel .carousel-item img,
+.carrusel img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* recorta la imagen manteniendo su aspecto */
+    border-radius: 12px;
 }
 
 /* Home*/
