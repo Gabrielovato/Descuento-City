@@ -37,7 +37,7 @@ elseif(isset($_POST["eliminar"])){
 
         $_SESSION["mensaje"] = " Cuenta de dueño eliminada .";
 
-        require("../funciones/funcionesMail.php");
+        require("../../funciones/funcionesMail.php");
         enviar_mail($nombreUsuario,"dueño","eliminado",NULL);        
         header("location:../../views/admin/dueños.php");
         exit();
