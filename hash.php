@@ -1,8 +1,17 @@
 
-<?php
-/*
+
 <?php
 
+$contraseña  = "admin123";
+
+$hash = password_hash($contraseña, PASSWORD_DEFAULT);
+
+echo $hash;
+
+
+
+
+/*
 session_start();
 
 require("../../conexionBD.php");
@@ -70,12 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
     exit();
 }
 ?>
-
-$contraseña  = "admin123";
-
-$hash = password_hash($contraseña, PASSWORD_DEFAULT);
-
-
-echo $hash;
 */
+
 ?>
+

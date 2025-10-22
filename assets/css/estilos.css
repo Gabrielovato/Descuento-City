@@ -26,7 +26,6 @@ body {
 
 
 
-
 .header{
     background-color: #0F172A;
     width: 100%;
@@ -71,7 +70,7 @@ body {
     padding:6px 12px;
     text-decoration: none;
     opacity: 70%;
-    transition:  border , opacity .3s;
+    transition:  border , opacity .15s;
 }
 
 .header__nav-item a:hover{
@@ -82,7 +81,7 @@ body {
 
 a {
     text-decoration: none;
-    color: #007BFF;
+    color: #007BFF; 
 }
 
 
@@ -164,10 +163,21 @@ a {
 
 /* Tabla dueños */
 
+.tabla.table {
+    width: auto;
+    max-width: 980px;
+    margin: 10px auto;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.20);
+}
 
-table , th , td {
+
+.tabla th,.tabla td {
     border: 1px solid #999;
-    border-collapse: collapse;
+    padding: 10px 12px;
+}
+
+.table-responsive {
+    overflow-x: auto;
 }
 
 .tabla  caption {
@@ -226,7 +236,7 @@ table , th , td {
 
 .paginacion{
     display: flex;
-    gap: 8px;
+    gap: 6px;
     justify-content: center;
     align-items: center;
     margin-top: 14px;
@@ -260,6 +270,10 @@ table , th , td {
     font-weight: 700;
     border: 1px solid #2563eb;
 }
+
+
+
+
 
 
 /* Creacion Locales */
