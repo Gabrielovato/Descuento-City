@@ -112,7 +112,7 @@ require("../../funciones/funcionesSQL.php");
             echo "<a href='locales.php?pagina=$i' class='btn btn-outline-primary btn-sm mx-1' id='paginacion'>$i</a>";
         }
     }
-    echo "</div>";
+    echo "</div><br>";
 
     if(isset($_SESSION['mensaje'])){
         echo "<p style='color :green'>".$_SESSION['mensaje']."</p>";
