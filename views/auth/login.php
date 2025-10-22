@@ -17,7 +17,7 @@ include("../../conexionBD.php");
     <?php include("../../includes/header.php");?>
     <div class="main-center">
         <div class="form__container">
-            <h3>Inicio Sesion</h3>
+            <h2>Inicio Sesion</h2>
             <form action="../../controllers/loginController.php" method="POST">
                 <div  class="datos-container">
                     <label>Email</label><br>
@@ -26,7 +26,8 @@ include("../../conexionBD.php");
                     <input type="password" name="clave" class="input-form" placeholder="Contraseña" required ><br> 
                 </div>
                 <input type="submit" name="confirm" value="Iniciar Sesion" class="button-form">
-                <p>¿No tiene cuenta? <a href="/Descuento-City/views/auth/registro.php">Crear una.</a></p>
+                <p>¿No tiene cuenta?</p>
+                <button class="button-form-login"><a href="/Descuento-City/views/auth/registro.php">Crear una</a></button>
             </form>
 
             <?php
