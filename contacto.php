@@ -22,16 +22,16 @@ include ("conexionBD.php");
 
             <form action="controllers/contactoController.php" method="post">
                 <div class="datos-conteiner">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
+                    <label for="nombre">Nombre:</label><br>
+                    <input type="text" id="nombre" name="nombre" required><br>
 
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" required><br>
 
-                    <label for="asunto">Asunto:</label>
-                    <input type="text" id="asunto" name="asunto" required>
+                    <label for="asunto">Asunto:</label><br>
+                    <input type="text" id="asunto" name="asunto" required><br>
 
-                    <label for="mensaje">Mensaje:</label>
+                    <label for="mensaje">Mensaje:</label><br>
                     <textarea id="mensaje" name="mensaje" required></textarea>
                 </div>
                 <input type="submit" name="enviar" value="Enviar" class="button-form">
