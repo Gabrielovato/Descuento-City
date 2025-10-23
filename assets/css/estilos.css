@@ -97,6 +97,9 @@ img {
     height: 32vh;
     object-fit: cover;
 }
+
+
+
 /* Formularios */
 
 .button-form{
@@ -286,7 +289,7 @@ img {
 
 
 
-/* Creacion Locales */
+/* Formlarios CRUD */
 
 
 .form__container-locales{
@@ -301,8 +304,18 @@ img {
 }
 
 
+.form__container-promociones{
+    background-color: #fff;
+    width: 90%;
+    max-width: 900px;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    margin: 24px auto;
+    box-sizing: border-box;
+}
 
-.form-locales input {
+.form-locales input , .form-promociones input{
     padding: 8px 20px;
     margin: 5px;
     border-radius: 4px;
@@ -310,13 +323,11 @@ img {
     
 }
 
-.form-locales label{
+.form-locales label ,.form-promociones label {
     font-weight: 600;
     margin-bottom: 6px;
     color: #222;
 }
-
-
 
 
 /* Carrusel */
