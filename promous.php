@@ -38,22 +38,13 @@ $resultado_promos = mysqli_query($conexion, $sql_promos);
         <div class="col-md-6">
             <select name="local" class="form-select">
                 <option value="">Todos los locales</option>
-                <?php
-                $sql_locales = "SELECT * FROM locales WHERE estadoLocal = 'activo'";
-                $res_locales = mysqli_query($conexion, $sql_locales);
-                while($local = mysqli_fetch_assoc($res_locales)){
-                    $selected = (isset($_GET['local']) && $_GET['local'] == $local['codLocal']) ? "selected" : "";
-                    echo "<option value='{$local['codLocal']}' $selected>{$local['nombreLocal']}</option>";
-                }
-                ?>
+                
             </select>
         </div>
         <div class="col-md-6">
             <select name="categoria" class="form-select">
-                <option value="">Todas las categorías</option>
-                <option value="Inicial" <?= (isset($_GET['categoria']) && $_GET['categoria']=='Inicial') ? "selected" : "" ?>>Inicial</option>
-                <option value="Medium" <?= (isset($_GET['categoria']) && $_GET['categoria']=='Medium') ? "selected" : "" ?>>Medium</option>
-                <option value="Premium" <?= (isset($_GET['categoria']) && $_GET['categoria']=='Premium') ? "selected" : "" ?>>Premium</option>
+                <option>Todas las categorias</option>
+               
             </select>
         </div>
     </form>
