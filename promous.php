@@ -1,0 +1,83 @@
+<?php
+include("conexionBD.php");
+
+$dia_semana = date('l'); // Lunes, Martes...
+$hoy = date('Y-m-d');
+
+
+
+$sql_promos = "SELECT p.*, l.nombreLocal
+               FROM promociones p
+               JOIN locales l ON p.codLocal = l.codLocal
+               WHERE p.estadoPromo = 'aprobada'
+                 AND '$hoy' BETWEEN p.fechaDesdePromo AND p.fechaHastaPromo
+                 AND FIND_IN_SET('$dia_semana', p.diasSemana)
+               ORDER BY p.fechaDesdePromo DESC";
+
+$resultado_promos = mysqli_query($conexion, $sql_promos);
+
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promociones - Invitado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body>
+<?php include("includes/header.php"); ?>
+
+<div class="container my-4">
+    <h2>Promociones Vigentes</h2>
+
+    <!-- Filtros -->
+    <form class="row mb-3" method="GET">
+        <div class="col-md-6">
+            <select name="local" class="form-select">
+                <option value="">Todos los locales</option>
+                <?php
+                $sql_locales = "SELECT * FROM locales WHERE estadoLocal = 'activo'";
+                $res_locales = mysqli_query($conexion, $sql_locales);
+                while($local = mysqli_fetch_assoc($res_locales)){
+                    $selected = (isset($_GET['local']) && $_GET['local'] == $local['codLocal']) ? "selected" : "";
+                    echo "<option value='{$local['codLocal']}' $selected>{$local['nombreLocal']}</option>";
+                }
+                ?>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <select name="categoria" class="form-select">
+                <option value="">Todas las categorías</option>
+                <option value="Inicial" <?= (isset($_GET['categoria']) && $_GET['categoria']=='Inicial') ? "selected" : "" ?>>Inicial</option>
+                <option value="Medium" <?= (isset($_GET['categoria']) && $_GET['categoria']=='Medium') ? "selected" : "" ?>>Medium</option>
+                <option value="Premium" <?= (isset($_GET['categoria']) && $_GET['categoria']=='Premium') ? "selected" : "" ?>>Premium</option>
+            </select>
+        </div>
+    </form>
+
+    <div class="row">
+        <?php
+        if($resultado_promos && mysqli_num_rows($resultado_promos) > 0){
+            while($promo = mysqli_fetch_assoc($resultado_promos)){
+                echo '<div class="col-md-4 mb-3">';
+                echo '<div class="card">';
+                echo '<div class="card-body">';
+                echo '<h5 class="card-title">'.htmlspecialchars($promo['nombreLocal']).'</h5>';
+                echo '<p class="card-text">'.htmlspecialchars($promo['descripcion']).'</p>';
+                echo '<p class="card-text">Válido: '.$promo['fecha_inicio'].' a '.$promo['fecha_fin'].'</p>';
+                echo '<p class="card-text">Días: '.$promo['dias_validos'].'</p>';
+                echo '</div></div></div>';
+            }
+        } else {
+            echo '<p>No hay promociones disponibles en este momento.</p>';
+        }
+        ?>
+    </div>
+</div>
+
+<?php include("includes/footer.php"); ?>
+</body>
+</html>
