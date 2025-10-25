@@ -56,7 +56,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
 
                             if(!is_dir("../../uploads/logos/")){
                             
-                            mkdir("../../uploads/logos/",0777,true);
+                                mkdir("../../uploads/logos/",0777,true);
                             }
 
                             if(move_uploaded_file($img["tmp_name"], $rutaDestino)){
