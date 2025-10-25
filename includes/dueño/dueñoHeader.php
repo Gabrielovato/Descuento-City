@@ -16,9 +16,9 @@
         </div>
         <nav class="header__nav">
             <ul class="header__nav-list">
-                <li class="header__nav-item"><a href="#promociones">Mis promos</a></li>
-                <li class="header__nav-item"><a href="#solicitudes">Solicitudes</a></li>
-                <li class="header__nav-item"><a href="#reportes">Reportes</a></li>
+                <li class="header__nav-item"><a href="/Descuento-City/views/dueño/mis_promos.php">Mis promos</a></li>
+                <li class="header__nav-item"><a href="/Descuento-City/views/dueño/solicitudes.php">Solicitudes</a></li>
+                <li class="header__nav-item"><a href="/Descuento-City/views/dueño/dueñoReporte.php">Reportes</a></li>
                 <li class="header__nav-item"><a href="/Descuento-City/views/auth/logout.php">Cerrar sesion</a></li>
             </ul>  
         </nav>

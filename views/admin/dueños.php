@@ -107,14 +107,15 @@ include("../../conexionBD.php");
                 echo "<a href='dueños.php?pagina=$i' class='btn btn-outline-primary btn-sm mx-1' id='paginacion'>$i</a>";
             }
         }
-        echo "</div>";
-    
-        if(isset($_SESSION['mensaje'])){
-            echo "<p style='color: green'>" . $_SESSION['mensaje']. "</p>";
-            unset($_SESSION['mensaje']);
-        }
-        
-        ?>
+        echo "</div>";?>
+
+        <div class="alert alert-succes">
+            <?php
+            if(isset($_SESSION['mensaje'])){
+                echo "<p style='color: green'>" . $_SESSION['mensaje']. "</p>";
+                unset($_SESSION['mensaje']);
+            }?>
+        </div>
 </body>
 </html> 
 
