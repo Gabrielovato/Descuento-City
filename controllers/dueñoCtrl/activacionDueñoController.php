@@ -20,12 +20,12 @@ if(isset($_POST["activar"])){
 
         require("../../funciones/funcionesMail.php");
         enviar_mail($nombreUsuario,"dueño","activo",NULL);
-        header("location:../../views/admin/dueños.php");
+        header("location:../../views/admin/dueños/dueños.php");
         exit();
     }
     else{
         $_SESSION["mensaje"] = "Error en actualizar cuenta .";
-        header("location:../../views/admin/dueños.php");
+        header("location:../../views/admin/dueños/dueños.php");
         exit();
     }
     
@@ -39,13 +39,13 @@ elseif(isset($_POST["eliminar"])){
 
         require("../../funciones/funcionesMail.php");
         enviar_mail($nombreUsuario,"dueño","eliminado",NULL);        
-        header("location:../../views/admin/dueños.php");
+        header("location:../../views/admin/dueños/dueños.php");
         exit();
     }
     else{
 
         $_SESSION["mensaje"] = " Error en actualizar cuenta .";
-        header("location:../../views/admin/dueños.php");
+        header("location:../../views/admin/dueños/dueños.php");
         exit();
     }
 }

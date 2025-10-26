@@ -71,13 +71,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
                         }
 
                         $_SESSION['mensaje'] = "Local creado con exito con su logo...  ";
-                        header("location:../../views/admin/locales.php");
+                        header("location:../../views/admin/locales/locales.php");
                         exit();
 
                     }
                     else{
                         $_SESSION['mensaje'] = " Error al crear local ";
-                        header("location:../../views/admin/locales.php");
+                        header("location:../../views/admin/locales/locales.php");
                         exit();
                     }
 
@@ -85,20 +85,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
                 }
                 else{
                     $_SESSION['mensaje'] = "Nombre de local o ubicacion ya existente... ";
-                    header("location:../../views/admin/locales.php");
+                    header("location:../../views/admin/locales/locales.php");
                     exit();
                 }
 
             }
             else{
                 $_SESSION['mensaje'] = "Codigo de dueño no existe...";
-                header("location:../../views/admin/locales.php");
+                header("location:../../views/admin/locales/locales.php");
                 exit();
                }
     }
     else{
         $_SESSION['mensaje'] = "⚠️ Complete todos los datos..";
-        header("location:../../views/admin/locales.php");
+        header("location:../../views/admin/locales/locales.php");
         exit();
     }
 
@@ -113,13 +113,13 @@ elseif($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["activar"])){
     if($resultado){
 
         $_SESSION['mensaje'] = "Local activado correctamente";
-        header("location:../../views/admin/locales.php");
+        header("location:../../views/admin/locales/locales.php");
         exit();
     }
     else{
 
         $_SESSION['mensaje'] = "Error al activar local";
-        header("location:../../views/admin/locales.php");
+        header("location:../../views/admin/locales/locales.php");
         exit();
     }
 
@@ -135,13 +135,13 @@ elseif($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["eliminar"])){
     if($resultado){
 
         $_SESSION['mensaje'] = "Local eliminado correctamente.";
-        header("location:../../views/admin/locales.php");
+        header("location:../../views/admin/locales/locales.php");
         exit();
 
     }else{
 
         $_SESSION['mensaje'] = "Error al eliminar local";
-        header("location:../../views/admin/locales.php");
+        header("location:../../views/admin/locales/locales.php");
         exit();
 
     }

@@ -74,7 +74,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
                 }
 
             } else {
-                if($img && $img["error"] != 0){
+                if($img && $img["error"] == 1){
                     $_SESSION["mensaje"] = "Promoción creada, pero error en archivo de imagen: " . $img["error"];
                 } else {
                     $_SESSION["mensaje"] = "Promoción creada sin imagen";
@@ -102,24 +102,23 @@ elseif($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["eliminar"])){
 
     $codPromo = $_POST["codPromo"] ?? '';
 
-    $consultaPromo = "UPDATE promociones SET estadoPromo='eliminada' WHERE codPromo = $codPromo";
-
+    //Elimino datos de la BD. No intereza tenerlo guardado en BD.
+    $consultaPromo = "DELETE FROM promociones WHERE codPromo=$codPromo";
     $resultado = mysqli_query($conexion,$consultaPromo);
 
     if($resultado){
 
-        $_SESSION["mensaje"] = "Promocion eliminada.";
+        $_SESSION["mensaje2"] = "Promocion eliminada.";
         header("location: ../../views/dueño/mis_promos.php");
         exit();
     }
     else{
 
-        $_SESSION["mensaje"] = "Error al eliminar promocion.";
+        $_SESSION["mensaje2"] = "Error al eliminar promocion.";
         header("location: ../../views/dueño/mis_promos.php");
         exit();
     }
- 
-    
+
 }
 
 mysqli_close($conexion);

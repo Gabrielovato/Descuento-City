@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear'])) {
         $_SESSION['mensaje'] = "Por favor, complete todos los campos.";
     }
 
-    header("Location: ../../views/admin/novedades.php");  //lo mando d nuevo a la pag del form.
+    header("Location: ../../views/admin/novedades/novedades.php");  //lo mando d nuevo a la pag del form.
     exit();
 
 } else {

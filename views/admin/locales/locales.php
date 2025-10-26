@@ -2,8 +2,8 @@
 
 session_start();
 
-include("../../conexionBD.php");
-require("../../funciones/funcionesSQL.php");
+include("../../../conexionBD.php");
+require("../../../funciones/funcionesSQL.php");
 
 ?>
 
@@ -17,7 +17,7 @@ require("../../funciones/funcionesSQL.php");
     <title>Locales</title>
 </head>
 <body>
-    <?php include("../../includes/admin/adminHeader.php");?>
+    <?php include("../../../includes/admin/adminHeader.php");?>
     <?php
 
     //paginacion
@@ -66,7 +66,7 @@ require("../../funciones/funcionesSQL.php");
             <!-- Logo -->
             <td>
                 <?php if(!empty($fila["rutaArchivo"])):?>
-                    <img src="../../<?= $fila["rutaArchivo"] ?>" alt="Logo del local" width="70" height="50" style="object-fit:cover;border-radius:8px;">
+                    <img src="../../../<?= $fila["rutaArchivo"] ?>" alt="Logo del local" width="70" height="50" style="object-fit:cover;border-radius:8px;">
                 <?php else: ?>
                     <span style="color: gray;">Sin logo</span>
                 <?php endif; ?>
@@ -76,7 +76,7 @@ require("../../funciones/funcionesSQL.php");
             <td> <?= $fila["codUsuario"]?></td>
             <td> <?= ucfirst($fila["estadoLocal"])?></td>
             <td>
-                <form action="../../controllers/localesCtrl/localesController.php" method="POST">
+                <form action="../../../controllers/localesCtrl/localesController.php" method="POST">
 
                     <!-- Si local esta eliminado -->
                     <?php if($fila["estadoLocal"] == 'eliminado' ):?>
@@ -126,7 +126,7 @@ require("../../funciones/funcionesSQL.php");
     <div class="main-center">
         <div class="form__container-locales">
             <h1>Crear local</h1>
-            <form class="form-locales" action="../../controllers/localesCtrl/localesController.php" method="POST" enctype="multipart/form-data">
+            <form class="form-locales" action="../../../controllers/localesCtrl/localesController.php" method="POST" enctype="multipart/form-data">
                 <label>Codigo Dueño</label><br>
                 <input type="text" name="codDueño" required><br>
                 <label >Nombre de local</label><br>

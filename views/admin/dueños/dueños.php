@@ -5,7 +5,7 @@
 
 session_start();
 
-include("../../conexionBD.php");
+include("../../../conexionBD.php");
 
 
 //llamo a funcion consultDueños.Donde selecciono dueños que esten pendientes.
@@ -23,7 +23,7 @@ include("../../conexionBD.php");
     
 </head>
 <body>
-    <?php include("../../includes/admin/adminHeader.php");?>
+    <?php include("../../../includes/admin/adminHeader.php");?>
 
 
     <?php
@@ -73,7 +73,7 @@ include("../../conexionBD.php");
                 <td> <?= ucfirst($dueño["estadoUsuario"]) ?></td>
                 <td> <?= $dueño["fechaRegistro"] ?></td>
                 <td>
-                    <form action="../../controllers/dueñoCtrl/activacionDueñoController.php" method="POST">
+                    <form action="../../../controllers/dueñoCtrl/activacionDueñoController.php" method="POST">
                         <input type="hidden" name="codUsuario" value="<?= $dueño['codUsuario'] ?>">
                         <input type="hidden" name="nombreUsuario" value="<?= $dueño['nombreUsuario']?>">
                         <!-- Si dueño = pendiente -->

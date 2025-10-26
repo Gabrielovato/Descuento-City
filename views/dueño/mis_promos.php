@@ -120,6 +120,11 @@ include("../../conexionBD.php");
     }
     echo "</table>";
 
+    if(isset($_SESSION['mensaje2'])){
+        echo "<p style='color :green'>".$_SESSION['mensaje2']."</p>";
+        unset($_SESSION['mensaje2']);
+    }
+
     mysqli_free_result($listaPromociones);
 
     echo "<div class='paginacion mt-3'>";

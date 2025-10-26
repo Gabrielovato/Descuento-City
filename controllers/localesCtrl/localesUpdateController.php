@@ -8,7 +8,7 @@ require("../../conexionBD.php");
 // Solo aceptar POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     $_SESSION['mensaje'] = "Método no permitido.";
-    header("Location: ../../views/admin/locales.php");
+    header("Location: ../../views/admin/locales/locales.php");
     exit;
 }
 
@@ -22,7 +22,7 @@ $nuevoLogo = isset($_FILES['nuevoLogo']) ? $_FILES['nuevoLogo'] : null;
 
 if ($codLocal <= 0) {
     $_SESSION['mensaje'] = "ID inválido.";
-    header("Location: ../../views/admin/locales.php");
+    header("Location: ../../views/admin/locales/locales.php");
     exit;
 }
 if ($nombreLocal === '' || $rubroLocal === '' || $ubicacionLocal === '') {
@@ -122,6 +122,6 @@ if ($nuevoLogo && isset($nuevoLogo['error']) && $nuevoLogo['error'] !== UPLOAD_E
 
 // Todo bien
 $_SESSION['mensaje'] = "Local actualizado correctamente.";
-header("Location: ../../views/admin/locales.php");
+header("location:../../views/admin/locales/locales.php");
 exit;
 ?>
