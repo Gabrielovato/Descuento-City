@@ -32,6 +32,9 @@ require("../../../funciones/funcionesSQL.php");
                 <option value="Inicial">Inicial</option>
                 <option value="Medium">Medium</option>
                 <option value="Premium">Premium</option>
+            <label>Imagen de la novedad</label><br>
+                <input class="input-img" type="file" name="imgNovedad" accept="image/*"><br>
+                <input class="button-form" type="submit" name="confirm" value="Subir imagen">
             </select><br>
             <input type="submit" value="Crear Novedad" class="button-form">
         </form>

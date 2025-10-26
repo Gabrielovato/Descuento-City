@@ -68,19 +68,25 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
         <h2>Promociones Y novedades</h2>
         <div class="card promo-card">Promociones</div>
         <div class="card promo-card">Novedades</div>
-    </section>
-    <section class="servicios">
-        <h2>Servicios</h2>
-        <div class="card-servicios">1</div>
-        <div class="card-servicios">2</div>
-        <div class="card-servicios">3</div>
-        <div class="card-servicios">4</div>
-        <div class="card-servicios">5</div>
-        <div class="card-servicios">6</div>
-        <div class="card-servicios">7</div>
-        <div class="card-servicios">8</div>
-    </section>
+
+    <?php
+    if ($resultado_novedades && mysqli_num_rows($resultado_novedades) > 0) {
+        while ($novedad = mysqli_fetch_assoc($resultado_novedades)) {
+            echo '<div class="card local">'; 
+            echo '<h3> Novedad </h3>';
+            echo '<p>' . htmlspecialchars($novedad['textoNovedad']) . '</p>';
+            echo '<small> Válido hasta: '. htmlspecialchars($novedad['fechaHastaNovedad']) .'</small>';
+            echo '</div>';
+        }
     
+    } else {
+        echo '<div class="card promo-card">';
+        echo '<h3> Novedades </h3>';
+        echo '<p>No hay novedades disponibles en este momento.</p>';
+        echo '</div>';
+    }
+    ?>
+    </section>
     <?php
     include("includes/footer.php");
     ?>  
