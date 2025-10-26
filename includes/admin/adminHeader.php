@@ -19,7 +19,7 @@
                 <li class="header__nav-item"><a href="/Descuento-City/views/admin/dueños.php">Dueños</a></li>
                 <li class="header__nav-item"><a href="/Descuento-City/views/admin/locales.php">Locales</a></li>
                 <li class="header__nav-item"><a href="#contacto">Promociones</a></li>
-                <li class="header__nav-item"><a href="#contacto">Novedades</a></li>
+                <li class="header__nav-item"><a href="/Descuento-City/views/admin/novedades.php">Novedades</a></li>
                 <li class="header__nav-item"><a href="#contacto">Reportes</a></li>
                 <li class="header__nav-item"><a href="/Descuento-City/views/auth/logout.php">Cerrar sesion</a></li>
             </ul>  
