@@ -20,7 +20,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
         $codDueño = $_SESSION["codUsuario"];
         $consultaLocal = "SELECT codLocal FROM locales WHERE codUsuario='$codDueño' AND estadoLocal='activo'";
         $resultadoLocal = mysqli_query($conexion,$consultaLocal);
-        
+
+
+        //Si dueño tiene local asociado.
         if($resultadoLocal && mysqli_num_rows($resultadoLocal) > 0){
             $local = mysqli_fetch_assoc($resultadoLocal);
             $codLocal = $local["codLocal"];
@@ -40,13 +42,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
 
             if($img && $img["error"] == 0){
                 
+                //Defino nombre del archivo.
                 $nombreArchivo = time() . "_" . basename($img["name"]);
                 $rutaDestino = "../../uploads/fondoPromo/". $nombreArchivo;
 
-                if(!is_dir("../../uploads/fondoPromo/")){ //si no existe la carpeta o archivo.
-                    //creo carpeta o archivo
+                //si no existe la carpeta o archivo.
+                if(!is_dir("../../uploads/fondoPromo/")){ 
+
+                    //Creo carpeta o archivo
                     mkdir("../../uploads/fondoPromo/",0777,true); 
                 }
+
+                //valido que el archivo fue subido por POST , exista ubicacion temporal , valido permisos de escritura.
 
                 if(move_uploaded_file($img["tmp_name"],$rutaDestino)){
 
@@ -89,6 +96,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
         header("location: ../../views/dueño/mis_promos.php");
         exit();
     }
+}    
+
+elseif($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["eliminar"])){
+
+    $codPromo = $_POST["codPromo"] ?? '';
+
+    $consultaPromo = "UPDATE promociones SET estadoPromo='eliminada' WHERE codPromo = $codPromo";
+
+    $resultado = mysqli_query($conexion,$consultaPromo);
+
+    if($resultado){
+
+        $_SESSION["mensaje"] = "Promocion eliminada.";
+        header("location: ../../views/dueño/mis_promos.php");
+        exit();
+    }
+    else{
+
+        $_SESSION["mensaje"] = "Error al eliminar promocion.";
+        header("location: ../../views/dueño/mis_promos.php");
+        exit();
+    }
+ 
+    
 }
 
 mysqli_close($conexion);

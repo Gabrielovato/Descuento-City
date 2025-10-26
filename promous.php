@@ -7,12 +7,12 @@ $hoy = date('Y-m-d');
 
 
 $sql_promos = "SELECT p.*, l.nombreLocal
-               FROM promociones p
-               JOIN locales l ON p.codLocal = l.codLocal
-               WHERE p.estadoPromo = 'aprobada'
-                 AND '$hoy' BETWEEN p.fechaDesdePromo AND p.fechaHastaPromo
-                 AND FIND_IN_SET('$dia_semana', p.diasSemana)
-               ORDER BY p.fechaDesdePromo DESC";
+            FROM promociones p
+            JOIN locales l ON p.codLocal = l.codLocal
+            WHERE p.estadoPromo = 'aprobada'
+            AND '$hoy' BETWEEN p.fechaDesde AND p.fechaHasta
+            AND FIND_IN_SET('$dia_semana', p.diasSemana)
+            ORDER BY p.fechaDesde DESC";
 
 $resultado_promos = mysqli_query($conexion, $sql_promos);
 
@@ -57,9 +57,9 @@ $resultado_promos = mysqli_query($conexion, $sql_promos);
                 echo '<div class="card">';
                 echo '<div class="card-body">';
                 echo '<h5 class="card-title">'.htmlspecialchars($promo['nombreLocal']).'</h5>';
-                echo '<p class="card-text">'.htmlspecialchars($promo['descripcion']).'</p>';
-                echo '<p class="card-text">Válido: '.$promo['fecha_inicio'].' a '.$promo['fecha_fin'].'</p>';
-                echo '<p class="card-text">Días: '.$promo['dias_validos'].'</p>';
+                echo '<p class="card-text">'.htmlspecialchars($promo['textoPromo']).'</p>';
+                echo '<p class="card-text">Válido: '.$promo['fechaDesde'].' a '.$promo['fechaHastas'].'</p>';
+                echo '<p class="card-text">Días: '.$promo['diasSemana'].'</p>';
                 echo '</div></div></div>';
             }
         } else {

@@ -41,7 +41,8 @@ include("../../conexionBD.php");
     $consulta = "SELECT p.* , i.rutaArchivo FROM promociones p 
                 LEFT JOIN imagenes i ON i.idIdentidad = p.codPromo AND i.tipoImg = 'portada'
                 INNER JOIN locales l ON p.codLocal = l.codLocal 
-                WHERE l.codUsuario = '$codUsuario'";
+                WHERE l.codUsuario = '$codUsuario' 
+                AND p.estadoPromo IN ('pendiente', 'aprobada')";
                 //p.* selecciona todos los campos de la tabla promociones , i.rutaArchivo => la ruta del archivo
                 // LEFT JOIN => Trae todas las promos , tenga imagen o no. i.IdIdentidad = p.promociones = relaciona img con promo.
                 // INNER JOIN => Trea promos que tenga un local asociado 
@@ -54,7 +55,8 @@ include("../../conexionBD.php");
     $consultaPromociones = "SELECT p.* , i.rutaArchivo FROM promociones p 
                            LEFT JOIN imagenes i ON i.idIdentidad = p.codPromo AND i.tipoImg = 'portada'
                            INNER JOIN locales l ON p.codLocal = l.codLocal 
-                           WHERE l.codUsuario = '$codUsuario'
+                           WHERE l.codUsuario = '$codUsuario' 
+                           AND p.estadoPromo IN ('pendiente', 'aprobada','denegada')
                            ORDER BY p.codPromo DESC LIMIT $inicio,$cant_por_pag";
 
     $listaPromociones = mysqli_query($conexion,$consultaPromociones);
@@ -75,7 +77,18 @@ include("../../conexionBD.php");
             <th>Eliminar</th>
         </th>";
 
+    if(mysqli_num_rows($listaPromociones) <= 0){
+        ?>
+        <tr>
+            <td colspan="9" style="text-align: center; padding: 20px; color: #666; font-style: italic;">
+                No hay promociones creadas
+            </td>
+        </tr>
+        <?php
+    }
     while($fila = mysqli_fetch_assoc($listaPromociones)){
+
+
         ?>
         <tr>
             <td> <?= $fila["codPromo"]?></td>
@@ -85,7 +98,7 @@ include("../../conexionBD.php");
                 <?php if(!empty($fila["rutaArchivo"])):?>
                     <img src="../../<?= $fila["rutaArchivo"] ?>" alt="portada promocion" width="70" height="50" style="object-fit:cover;border-radius:8px;">
                 <?php else: ?>
-                    <span style="color: gray;">Sin logo</span>
+                    <span style="color: gray;">Sin portada</span>
                 <?php endif; ?>
             </td>
             <td> <?= $fila["fechaDesde"]?></td>
@@ -94,10 +107,9 @@ include("../../conexionBD.php");
             <td> <?= $fila["diasSemana"]?></td>
             <td> <?= ucfirst($fila["estadoPromo"])?></td>
             <td>
-                <form action="../../controllers/localesCtrl/PromocionesDueñoController.php" method="POST">
-
+                <form action="../../controllers/dueñoCtrl/promocionesDueñoController.php" method="POST">
                     <!-- Si local esta eliminado -->
-                    <?php if($fila["estadoPromo"] == 'pendiente' OR 'activo'):?>
+                    <?php if($fila["estadoPromo"] == 'pendiente' OR 'aprobada' OR 'denegada'):?>
                         <input type="hidden" name="codPromo" value="<?= $fila["codPromo"] ?>">
                         <button type="submit" name="eliminar" class="button-eliminar">Eliminar</button>
                     <?php endif;?>
