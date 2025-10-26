@@ -18,13 +18,8 @@ include("../../conexionBD.php")
     include("../../includes/dueño/dueñoHeader.php");
 
     ?>
-
-
-
-
-
-    <h1>Solicitudes</h1>
-    <h3>Menu de las solicitudes de promociones de clientes</h3>
+    <h1>Reporte</h1>
+    <h3>Menu sobre uso de mis promociones</h3>
 
 
 </body>

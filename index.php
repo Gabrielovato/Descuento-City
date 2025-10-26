@@ -81,6 +81,8 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
         <div class="card-servicios">8</div>
     </section>
     
-    <?php include("includes/footer.php"); ?>  
+    <?php
+    include("includes/footer.php");
+    ?>  
 </body>
 </html>

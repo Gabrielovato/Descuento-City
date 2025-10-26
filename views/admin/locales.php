@@ -22,7 +22,7 @@ require("../../funciones/funcionesSQL.php");
 
     //paginacion
 
-    $cant_por_pag = 1;
+    $cant_por_pag =3;
     $pagina = isset($_GET["pagina"]) ? $_GET["pagina"] : 1;
     if(!$pagina){
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-10-2025 a las 18:46:10
+-- Tiempo de generación: 25-10-2025 a las 01:59:05
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,7 +45,8 @@ INSERT INTO `imagenes` (`IdImg`, `tipoImg`, `nombreImg`, `rutaArchivo`, `tipoIde
 (1, 'logo', '1761115333_fac4b0ca.jpg', 'uploads/logos/1761115333_fac4b0ca.jpg', 'local', 19, '2025-10-22 03:42:13'),
 (2, 'logo', '1761115361_mclogo.png', 'uploads/logos/1761115361_mclogo.png', 'local', 20, '2025-10-22 03:42:41'),
 (3, 'logo', '1761115514_logoWilson.webp', 'uploads/logos/1761115514_logoWilson.webp', 'local', 22, '2025-10-22 03:45:14'),
-(4, 'logo', '1761150592_e9820a99.png', 'uploads/logos/1761150592_e9820a99.png', 'local', 21, '2025-10-22 13:29:52');
+(4, 'logo', '1761150592_e9820a99.png', 'uploads/logos/1761150592_e9820a99.png', 'local', 21, '2025-10-22 13:29:52'),
+(5, 'portada', '1761348924_promoMC.png', 'uploads/fondoPromo/1761348924_promoMC.png', 'promocion', 5, '2025-10-24 20:35:24');
 
 -- --------------------------------------------------------
 
@@ -95,13 +96,20 @@ CREATE TABLE `novedades` (
 CREATE TABLE `promociones` (
   `codPromo` int(11) NOT NULL,
   `textoPromo` varchar(200) NOT NULL,
-  `fechaDesdePromo` date NOT NULL,
-  `fechaHastaPromo` date NOT NULL,
+  `fechaDesde` date NOT NULL,
+  `fechaHasta` date NOT NULL,
   `categoriaCliente` enum('Inicial','Medium','Premium') NOT NULL,
   `diasSemana` set('Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo') DEFAULT NULL,
   `estadoPromo` enum('pendiente','aprobada','denegada') NOT NULL DEFAULT 'pendiente',
   `codLocal` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `promociones`
+--
+
+INSERT INTO `promociones` (`codPromo`, `textoPromo`, `fechaDesde`, `fechaHasta`, `categoriaCliente`, `diasSemana`, `estadoPromo`, `codLocal`) VALUES
+(5, '2x1 en Hamburguesas', '2025-10-25', '2025-10-29', 'Inicial', 'Viernes,Sábado,Domingo', 'pendiente', 20);
 
 -- --------------------------------------------------------
 
@@ -224,7 +232,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
-  MODIFY `IdImg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdImg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `locales`
@@ -242,7 +250,7 @@ ALTER TABLE `novedades`
 -- AUTO_INCREMENT de la tabla `promociones`
 --
 ALTER TABLE `promociones`
-  MODIFY `codPromo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codPromo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `solicitudes_descuentos`
@@ -296,4 +304,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
