@@ -3,13 +3,14 @@
 
 * {
     scroll-behavior: smooth;
+    font-family: "Poppins", Helvetica, Arial, sans-serif;
+
 
 }
 
 body {
     min-height: 100vh;
     display: flex;
-    font-family: "Poppins", Helvetica, Arial, sans-serif;
     font-size: 1rem;
     font-weight: 400;
     text-align: center;
@@ -37,6 +38,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     padding: 0 32px;
+    z-index: 1;
 }
 
 

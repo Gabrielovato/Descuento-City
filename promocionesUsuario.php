@@ -1,4 +1,5 @@
 <?php
+
 include("conexionBD.php");
 
 date_default_timezone_set('America/Argentina/Buenos_Aires');
@@ -21,9 +22,10 @@ $dia_semana = $dias_en_español[$dia_semana_server]; //Realizo conversion. Para 
 
 
 // Consulta optimizada para promociones vigentes
-$sql_promos = "SELECT p.*, l.nombreLocal, l.rubroLocal
+$sql_promos = "SELECT p.*, l.nombreLocal, l.rubroLocal, i.rutaArchivo 
             FROM promociones p
             JOIN locales l ON p.codLocal = l.codLocal
+            LEFT JOIN imagenes i ON i.idIdentidad = p.codPromo AND i.tipoImg = 'portada'
             WHERE p.estadoPromo = 'aprobada'
             AND l.estadoLocal = 'activo'
             AND '$hoy' BETWEEN p.fechaDesde AND p.fechaHasta
@@ -74,8 +76,15 @@ if (!$resultado_promos) {
             while($promo = mysqli_fetch_assoc($resultado_promos)){
                 ?>
                 <div class="col-md-4 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
+                    <div class="card" style="width: 18rem;">
+                        <?php if(!empty($promo["rutaArchivo"])):?>
+                        <img src="<?= htmlspecialchars($promo["rutaArchivo"]) ?>" class="card-img-top" alt="portada promocion" style="height: 200px; object-fit: cover;"> 
+                        <?php else: ?>
+                            <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 200px;">
+                                <span class="text-muted"><i class="fas fa-image"></i> Sin portada</span>
+                            </div>
+                        <?php endif; ?>
+                        <div class="card-body bg-light">
                             <h5 class="card-title">
                                 <i class="fas fa-store"></i> <?= htmlspecialchars($promo['nombreLocal']) ?>
                             </h5>
@@ -85,22 +94,16 @@ if (!$resultado_promos) {
                             <p class="card-text"><?= htmlspecialchars($promo['textoPromo']) ?></p>
                             <p class="card-text">
                                 <small class="text-muted">
-                                    <i class="fas fa-calendar"></i> 
-                                    Válido: <?= $promo['fechaDesde'] ?> al <?=  $promo['fechaHasta'] ?>
+                                    <i class="fas fa-calendar"></i> Hasta :<?=$promo['fechaHasta'] ?> 
                                 </small>
                             </p>
-                            <?php if (!empty($promo['diasSemana'])): ?>
-                            <p class="card-text">
-                                <small class="text-muted">
-                                    <i class="fas fa-clock"></i> 
-                                    Días: <?= htmlspecialchars($promo['diasSemana']) ?>
-                                </small>
-                            </p>
-                            <?php endif; ?>
+                            <form action="usoPromocionController.php">
+                                <input type="sumbit"  class="btn btn-outline-success" name="usar" value="Usar promocion">       
+                            </form>
                         </div>
                     </div>
                 </div>
-                <?php
+            <?php
             }
         } else {
             ?>
@@ -114,7 +117,6 @@ if (!$resultado_promos) {
             <?php
         }
         ?>
-    </div>
     </div>
 </div>
 
