@@ -18,24 +18,23 @@ require("../../../funciones/funcionesSQL.php");
 </head>
 <body>
     <?php include("../../../includes/admin/adminHeader.php");?>
-
     <h1>Crear novedad</h1>
-        <form class="form-locales" action="../../../controllers/novedadesCtrl/novedadesController.php" method="POST">
-            <label>Texto de la novedad</label><br>
-            <textarea name="textoNovedad" rows="5" cols="40"></textarea><br>
-            <label >Fecha de inicio de novedad</label><br>
-            <input type="date" name= "fechaDesdeNovedad" ><br>
-            <label >Fecha de finalizacion de novedad</label><br>
-            <input type="date" name="fechaHastaNovedad"><br>
-            <label>Dirigido a: </label><br>
-            <select name="tipoUsuario"></select><br>
-                <option value="Inicial">Inicial</option>
-                <option value="Medium">Medium</option>
-                <option value="Premium">Premium</option>
-            <label>Imagen de la novedad</label><br>
-                <input class="input-img" type="file" name="imgNovedad" accept="image/*"><br>
-                <input class="button-form" type="submit" name="confirm" value="Subir imagen">
-            </select><br>
-            <input type="submit" value="Crear Novedad" class="button-form">
-        </form>
+    <form class="form-locales" action="../../../controllers/novedadesCtrl/novedadesController.php" method="POST">
+        <label>Texto de la novedad</label><br>
+        <textarea name="textoNovedad" rows="5" cols="40"></textarea><br>
+        <label >Fecha de inicio de novedad</label><br>
+        <input type="date" name= "fechaDesdeNovedad" ><br>
+        <label >Fecha de finalizacion de novedad</label><br>
+        <input type="date" name="fechaHastaNovedad"><br>
+        <label>Dirigido a: </label><br>
+        <select name="tipoUsuario">
+            <option value="Inicial">Inicial</option>
+            <option value="Medium">Medium</option>
+            <option value="Premium">Premium</option>
+        </select><br>
+        <label>Imagen de la novedad</label><br>
+            <input class="input-img" type="file" name="imgNovedad" accept="image/*"><br>
+            <input class="button-form" type="submit" name="confirm" value="Subir imagen">
+        <input type="submit" value="Crear Novedad" class="button-form">
+    </form>
 </body>

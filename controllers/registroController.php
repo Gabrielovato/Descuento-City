@@ -43,28 +43,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])) {
                 }
                 catch(mysqli_sql_exception){
                     //Muestro mensaje de ERROR. Falla conexion BD
-                    $_SESSION['mensaje'] = "⚠️ Error en cargar datos...";
+                    $_SESSION['mensaje_error'] = "Error al cargar datos en la base de datos";
                     header("Location: ../views/auth/registro.php");
                     exit();
                 }
             }
             else{
                 //Email ya exisitente en BD. Muestro mensaje 
-                $_SESSION['mensaje'] = "⚠️ Usuario ya existente..";
+                $_SESSION['mensaje_warning'] = "Usuario ya existente";
                 header("Location: ../views/auth/registro.php");
                 exit();
             }
         }
         else{
             //Contraseñas no coinciden
-            $_SESSION['mensaje'] = " ⚠️ Contraseñas no coinciden.. ";
+            $_SESSION['mensaje_warning'] = "Las contraseñas no coinciden";
             header("Location: ../views/auth/registro.php");
             exit();
         }
     }
     else{
         //Faltan completar datos. Muestro mensaje
-        $_SESSION['mensaje'] = "⚠️ Complete todos los campos.";
+        $_SESSION['mensaje_warning'] = "Complete todos los campos";
         header("Location: ../views/auth/registro.php");
         exit();
     }

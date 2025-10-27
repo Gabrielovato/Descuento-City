@@ -15,7 +15,7 @@ if(isset($_POST["activar"])){
     if($resultado){
 
         //si activo dueño envio mensaje.
-        $_SESSION["mensaje"] = " Cuenta de dueño activada .";
+        $_SESSION["mensaje_exito"] = "Cuenta de dueño activada";
         //Envio mail de aviso a dueño
 
         require("../../funciones/funcionesMail.php");
@@ -24,7 +24,7 @@ if(isset($_POST["activar"])){
         exit();
     }
     else{
-        $_SESSION["mensaje"] = "Error en actualizar cuenta .";
+        $_SESSION["mensaje_error"] = "Error en actualizar cuenta";
         header("location:../../views/admin/dueños/dueños.php");
         exit();
     }
@@ -35,7 +35,7 @@ elseif(isset($_POST["eliminar"])){
     $resultado = mysqli_query($conexion,$consultaUpdate);
     if($resultado){
 
-        $_SESSION["mensaje"] = " Cuenta de dueño eliminada .";
+        $_SESSION["mensaje_warning"] = "Cuenta de dueño eliminada";
 
         require("../../funciones/funcionesMail.php");
         enviar_mail($nombreUsuario,"dueño","eliminado",NULL);        
@@ -44,7 +44,7 @@ elseif(isset($_POST["eliminar"])){
     }
     else{
 
-        $_SESSION["mensaje"] = " Error en actualizar cuenta .";
+        $_SESSION["mensaje_error"] = "Error en actualizar cuenta";
         header("location:../../views/admin/dueños/dueños.php");
         exit();
     }

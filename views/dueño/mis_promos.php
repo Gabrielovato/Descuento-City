@@ -57,7 +57,7 @@ include("../../conexionBD.php");
                            INNER JOIN locales l ON p.codLocal = l.codLocal 
                            WHERE l.codUsuario = '$codUsuario' 
                            AND p.estadoPromo IN ('pendiente', 'aprobada','denegada')
-                           ORDER BY p.codPromo DESC LIMIT $inicio,$cant_por_pag";
+                           ORDER BY FIELD(estadoPromo,'aprobada','pendiente','denegada') LIMIT $inicio,$cant_por_pag";
 
     $listaPromociones = mysqli_query($conexion,$consultaPromociones);
 
@@ -118,12 +118,20 @@ include("../../conexionBD.php");
         </tr>
     <?php
     }
-    echo "</table>";
+    echo "</table>";?>
 
-    if(isset($_SESSION['mensaje2'])){
-        echo "<p style='color :green'>".$_SESSION['mensaje2']."</p>";
-        unset($_SESSION['mensaje2']);
-    }
+    
+
+    <?php if(isset($_SESSION['mensaje2'])): ?>
+        <div class="alert alert-success" role="alert">
+            <?php
+            echo "<p>".$_SESSION['mensaje2']."</p>";
+            unset($_SESSION['mensaje2']);?>
+        </div>
+    <?php endif;?>
+
+    <?php
+
 
     mysqli_free_result($listaPromociones);
 
@@ -186,8 +194,30 @@ include("../../conexionBD.php");
             </form>
             <?php
 
+            // Sistema de mensajes organizados
+            if(isset($_SESSION['mensaje_exito'])){
+                echo "<div class='alert alert-success'><p>".$_SESSION['mensaje_exito']."</p></div>";
+                unset($_SESSION['mensaje_exito']);
+            }
+            
+            if(isset($_SESSION['mensaje_error'])){
+                echo "<div class='alert alert-danger'><p>".$_SESSION['mensaje_error']."</p></div>";
+                unset($_SESSION['mensaje_error']);
+            }
+            
+            if(isset($_SESSION['mensaje_warning'])){
+                echo "<div class='alert alert-warning'><p>".$_SESSION['mensaje_warning']."</p></div>";
+                unset($_SESSION['mensaje_warning']);
+            }
+            
+            if(isset($_SESSION['mensaje_info'])){
+                echo "<div class='alert alert-info'><p>".$_SESSION['mensaje_info']."</p></div>";
+                unset($_SESSION['mensaje_info']);
+            }
+
+            // Mensaje legacy (por compatibilidad)
             if(isset($_SESSION['mensaje'])){
-                echo "<p style='color :green'>".$_SESSION['mensaje']."</p>";
+                echo "<div class='alert alert-success'><p>".$_SESSION['mensaje']."</p></div>";
                 unset($_SESSION['mensaje']);
             }
 

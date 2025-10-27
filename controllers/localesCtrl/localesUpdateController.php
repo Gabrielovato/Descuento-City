@@ -7,7 +7,7 @@ require("../../conexionBD.php");
 
 // Solo aceptar POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    $_SESSION['mensaje'] = "Método no permitido.";
+    $_SESSION['mensaje_warning'] = "Método no permitido";
     header("Location: ../../views/admin/locales/locales.php");
     exit;
 }
@@ -21,12 +21,12 @@ $existeLogo = isset($_POST['existeLogo']) ? trim($_POST['existeLogo']) : '';
 $nuevoLogo = isset($_FILES['nuevoLogo']) ? $_FILES['nuevoLogo'] : null;
 
 if ($codLocal <= 0) {
-    $_SESSION['mensaje'] = "ID inválido.";
+    $_SESSION['mensaje_error'] = "ID de local inválido";
     header("Location: ../../views/admin/locales/locales.php");
     exit;
 }
 if ($nombreLocal === '' || $rubroLocal === '' || $ubicacionLocal === '') {
-    $_SESSION['mensaje'] = "Complete todos los campos.";
+    $_SESSION['mensaje_warning'] = "Complete todos los campos requeridos";
     header("Location: ../../views/admin/locales/localUpdate.php?codLocal=" . urlencode($codLocal));
     exit;
 }
@@ -36,7 +36,7 @@ $consultaUpdate = " UPDATE locales SET nombreLocal = '$nombreLocal', rubroLocal 
 ";
 $resUpdate = mysqli_query($conexion, $consultaUpdate);
 if (!$resUpdate) {
-    $_SESSION['mensaje'] = "Error al actualizar local: " . mysqli_error($conexion);
+    $_SESSION['mensaje_error'] = "Error al actualizar local: " . mysqli_error($conexion);
     header("Location: ../../views/admin/locales/localUpdate.php?codLocal=" . urlencode($codLocal));
     exit;
 }
@@ -44,7 +44,7 @@ if (!$resUpdate) {
 // Si se subió nuevo logo, lo guardo y actualizo/insert en tabla imagenes
 if ($nuevoLogo && isset($nuevoLogo['error']) && $nuevoLogo['error'] !== UPLOAD_ERR_NO_FILE) {
     if ($nuevoLogo['error'] !== UPLOAD_ERR_OK) {
-        $_SESSION['mensaje'] = "Error al subir archivo (código: " . intval($nuevoLogo['error']) . ").";
+        $_SESSION['mensaje_error'] = "Error al subir archivo (código: " . intval($nuevoLogo['error']) . ")";
         header("Location: ../../views/admin/locales/localUpdate.php?codLocal=" . urlencode($codLocal));
         exit;
     }
@@ -53,7 +53,7 @@ if ($nuevoLogo && isset($nuevoLogo['error']) && $nuevoLogo['error'] !== UPLOAD_E
     $ext = strtolower(pathinfo($nuevoLogo['name'], PATHINFO_EXTENSION));
     $permitidos = array('jpg','jpeg','png','gif','webp');
     if (!in_array($ext, $permitidos)) {
-        $_SESSION['mensaje'] = "Tipo de archivo no permitido.";
+        $_SESSION['mensaje_warning'] = "Tipo de archivo no permitido";
         header("Location: ../../views/admin/locales/localUpdate.php?codLocal=" . urlencode($codLocal));
         exit;
     }
@@ -63,7 +63,7 @@ if ($nuevoLogo && isset($nuevoLogo['error']) && $nuevoLogo['error'] !== UPLOAD_E
     $uploadDir = __DIR__ . "/../../" . $uploadRel;
     if (!is_dir($uploadDir)) {
         if (!mkdir($uploadDir, 0755, true) && !is_dir($uploadDir)) {
-            $_SESSION['mensaje'] = "No se pudo crear carpeta uploads.";
+            $_SESSION['mensaje_error'] = "No se pudo crear carpeta de uploads";
             header("Location: ../../views/admin/locales/localUpdate.php?codLocal=" . urlencode($codLocal));
             exit;
         }
@@ -72,7 +72,7 @@ if ($nuevoLogo && isset($nuevoLogo['error']) && $nuevoLogo['error'] !== UPLOAD_E
     $nuevoNombre = time() . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
     $destino = $uploadDir . $nuevoNombre;
     if (!move_uploaded_file($nuevoLogo['tmp_name'], $destino)) {
-        $_SESSION['mensaje'] = "No se pudo mover el archivo.";
+        $_SESSION['mensaje_error'] = "No se pudo mover el archivo";
         header("Location: ../../views/admin/locales/localUpdate.php?codLocal=" . urlencode($codLocal));
         exit;
     }
@@ -83,7 +83,7 @@ if ($nuevoLogo && isset($nuevoLogo['error']) && $nuevoLogo['error'] !== UPLOAD_E
     $consultaCheck = "SELECT idImg, rutaArchivo FROM imagenes WHERE idIdentidad = $codLocal AND tipoImg = 'logo' LIMIT 1";
     $resCheck = mysqli_query($conexion, $consultaCheck);
     if (!$resCheck) {
-        $_SESSION['mensaje'] = "Error consulta imagen: " . mysqli_error($conexion);
+        $_SESSION['mensaje_error'] = "Error al consultar imagen: " . mysqli_error($conexion);
         header("Location: ../../views/admin/locales/localUpdate.php?codLocal=" . urlencode($codLocal));
         exit;
     }
@@ -96,7 +96,7 @@ if ($nuevoLogo && isset($nuevoLogo['error']) && $nuevoLogo['error'] !== UPLOAD_E
         $consultaUpdImg = "UPDATE imagenes SET nombreImg = '" . mysqli_real_escape_string($conexion, $nuevoNombre) . "', rutaArchivo = '" . mysqli_real_escape_string($conexion, $rutaBD) . "', fechaSubida = NOW() WHERE idImg = $idImg";
         $resUpdImg = mysqli_query($conexion, $consultaUpdImg);
         if (!$resUpdImg) {
-            $_SESSION['mensaje'] = "Error al actualizar imagen: " . mysqli_error($conexion);
+            $_SESSION['mensaje_error'] = "Error al actualizar imagen: " . mysqli_error($conexion);
             header("Location: ../../views/admin/locales/localUpdate.php?codLocal=" . urlencode($codLocal));
             exit;
         }
@@ -113,7 +113,7 @@ if ($nuevoLogo && isset($nuevoLogo['error']) && $nuevoLogo['error'] !== UPLOAD_E
         $consultaInsImg = "INSERT INTO imagenes (tipoImg, nombreImg, rutaArchivo, tipoIdentidad, idIdentidad, fechaSubida) VALUES ('logo', '$nombreEsc', '$rutaEsc', 'local', $codLocal, NOW())";
         $resInsImg = mysqli_query($conexion, $consultaInsImg);
         if (!$resInsImg) {
-            $_SESSION['mensaje'] = "Error al insertar imagen: " . mysqli_error($conexion);
+            $_SESSION['mensaje_error'] = "Error al insertar imagen: " . mysqli_error($conexion);
             header("Location: ../../views/admin/locales/localUpdate.php?codLocal=" . urlencode($codLocal));
             exit;
         }
@@ -121,7 +121,7 @@ if ($nuevoLogo && isset($nuevoLogo['error']) && $nuevoLogo['error'] !== UPLOAD_E
 }
 
 // Todo bien
-$_SESSION['mensaje'] = "Local actualizado correctamente.";
+$_SESSION['mensaje_exito'] = "Local actualizado correctamente";
 header("location:../../views/admin/locales/locales.php");
 exit;
 ?>

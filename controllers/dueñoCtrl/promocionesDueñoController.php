@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
             $local = mysqli_fetch_assoc($resultadoLocal);
             $codLocal = $local["codLocal"];
         } else {
-            $_SESSION["mensaje"] = "No se encontró un local activo para este usuario";
+            $_SESSION["mensaje_error"] = "No se encontró un local activo para este usuario";
             header("location: ../../views/dueño/mis_promos.php");
             exit();
         }
@@ -65,19 +65,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
                     $resultadoImg = mysqli_query($conexion,$insertImg);
                     
                     if($resultadoImg){
-                        $_SESSION["mensaje"] = "Promoción e imagen creadas con éxito";
+                        $_SESSION["mensaje_exito"] = "Promoción e imagen creadas con éxito";
                     } else {
-                        $_SESSION["mensaje"] = "Promoción creada, pero error al guardar imagen: " . mysqli_error($conexion);
+                        $_SESSION["mensaje_warning"] = "Promoción creada, pero error al guardar imagen: " . mysqli_error($conexion);
                     }
                 } else {
-                    $_SESSION["mensaje"] = "Promoción creada, pero error al subir el archivo de imagen";
+                    $_SESSION["mensaje_warning"] = "Promoción creada, pero error al subir el archivo de imagen";
                 }
 
             } else {
-                if($img && $img["error"] == 1){
-                    $_SESSION["mensaje"] = "Promoción creada, pero error en archivo de imagen: " . $img["error"];
+                if($img && $img["error"] != 0){
+                    $_SESSION["mensaje_warning"] = "Promoción creada, pero error en archivo de imagen: " . $img["error"];
                 } else {
-                    $_SESSION["mensaje"] = "Promoción creada sin imagen";
+                    $_SESSION["mensaje_exito"] = "Promoción creada sin imagen";
                 }
             }
 
@@ -85,14 +85,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
             exit();
         }
         else{
-            $_SESSION["mensaje"] = "Error al cargar datos...";
+            $_SESSION["mensaje_error"] = "Error al cargar datos...";
             header("location: ../../views/dueño/mis_promos.php");
             exit();
         }
 
     }
     else{
-        $_SESSION["mensaje"] = "Complete todos los campos..";
+        $_SESSION["mensaje_warning"] = "Complete todos los campos";
         header("location: ../../views/dueño/mis_promos.php");
         exit();
     }

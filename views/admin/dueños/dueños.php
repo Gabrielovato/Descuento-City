@@ -109,13 +109,42 @@ include("../../../conexionBD.php");
         }
         echo "</div>";?>
 
-        <div class="alert alert-succes">
-            <?php
-            if(isset($_SESSION['mensaje'])){
-                echo "<p style='color: green'>" . $_SESSION['mensaje']. "</p>";
-                unset($_SESSION['mensaje']);
-            }?>
-        </div>
+        <!-- Sistema de mensajes organizados -->
+        <?php if(isset($_SESSION['mensaje_exito'])): ?>
+            <div class="alert alert-success">
+                <p><?= $_SESSION['mensaje_exito'] ?></p>
+            </div>
+            <?php unset($_SESSION['mensaje_exito']); ?>
+        <?php endif; ?>
+
+        <?php if(isset($_SESSION['mensaje_error'])): ?>
+            <div class="alert alert-danger">
+                <p><?= $_SESSION['mensaje_error'] ?></p>
+            </div>
+            <?php unset($_SESSION['mensaje_error']); ?>
+        <?php endif; ?>
+
+        <?php if(isset($_SESSION['mensaje_warning'])): ?>
+            <div class="alert alert-warning">
+                <p><?= $_SESSION['mensaje_warning'] ?></p>
+            </div>
+            <?php unset($_SESSION['mensaje_warning']); ?>
+        <?php endif; ?>
+
+        <?php if(isset($_SESSION['mensaje_info'])): ?>
+            <div class="alert alert-info">
+                <p><?= $_SESSION['mensaje_info'] ?></p>
+            </div>
+            <?php unset($_SESSION['mensaje_info']); ?>
+        <?php endif; ?>
+
+        <!-- Mensaje legacy (por compatibilidad) -->
+        <?php if(isset($_SESSION['mensaje'])): ?>
+            <div class="alert alert-success">
+                <p><?= $_SESSION['mensaje'] ?></p>
+            </div>
+            <?php unset($_SESSION['mensaje']); ?>
+        <?php endif; ?>
 </body>
 </html> 
 

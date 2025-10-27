@@ -114,9 +114,22 @@ require("../../../funciones/funcionesSQL.php");
     }
     echo "</div><br>";
 
-    if(isset($_SESSION['mensaje'])){
-        echo "<p style='color :green'>".$_SESSION['mensaje']."</p>";
-        unset($_SESSION['mensaje']);
+    // Alertas organizadas por tipo
+    if(isset($_SESSION['mensaje_exito'])){
+        echo "<div class='alert alert-success'><i class='fas fa-check-circle'></i> ".$_SESSION['mensaje_exito']."</div>";
+        unset($_SESSION['mensaje_exito']);
+    }
+    if(isset($_SESSION['mensaje_error'])){
+        echo "<div class='alert alert-danger'><i class='fas fa-exclamation-circle'></i> ".$_SESSION['mensaje_error']."</div>";
+        unset($_SESSION['mensaje_error']);
+    }
+    if(isset($_SESSION['mensaje_warning'])){
+        echo "<div class='alert alert-warning'><i class='fas fa-exclamation-triangle'></i> ".$_SESSION['mensaje_warning']."</div>";
+        unset($_SESSION['mensaje_warning']);
+    }
+    if(isset($_SESSION['mensaje_info'])){
+        echo "<div class='alert alert-info'><i class='fas fa-info-circle'></i> ".$_SESSION['mensaje_info']."</div>";
+        unset($_SESSION['mensaje_info']);
     }
 
     ?>

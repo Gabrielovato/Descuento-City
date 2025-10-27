@@ -46,30 +46,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])) {
                     }
 
                 } elseif ($usuario["estadoUsuario"] == "pendiente") {
-                    $_SESSION['mensaje'] = "⚠️ Cuenta no activada.";
+                    $_SESSION['mensaje_warning'] = "Cuenta no activada";
                     header("Location: ../views/auth/login.php");
                     exit();
 
                 } else {
-                    $_SESSION['mensaje'] = "⚠️ Cuenta se encuentra bloqueada.";
+                    $_SESSION['mensaje_error'] = "Cuenta se encuentra bloqueada";
                     header("Location: ../views/auth/login.php");
                     exit();
                 }
             } else {
                 // Contraseña incorrecta
-                $_SESSION['mensaje'] = "⚠️ Contraseña incorrecta.";
+                $_SESSION['mensaje_error'] = "Contraseña incorrecta";
                 header("Location: ../views/auth/login.php");
                 exit();
             }
 
         } else {
-            $_SESSION['mensaje'] = "⚠️ Usuario no encontrado.";
+            $_SESSION['mensaje_error'] = "Usuario no encontrado";
             header("Location: ../views/auth/login.php");
             exit();
         }
     } else {
         // Faltan datos
-        $_SESSION['mensaje'] = "⚠️ Complete todos los campos.";
+        $_SESSION['mensaje_warning'] = "Complete todos los campos";
         header("Location: ../views/auth/login.php");
         exit();
     }

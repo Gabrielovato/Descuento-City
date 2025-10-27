@@ -51,4 +51,28 @@ function update_estado_SQL($con,$email){
     return $resultado_update;
 }
 
+
+//actualizar estado promocion ('Aprobada','Denegada') y eliminar de BD
+function cambiarEstado($conexion,$codPromo,$accion){
+
+    $consultaSQL = '';
+
+    if($accion == 'aprobar'){
+        $consultaSQL = "UPDATE promociones SET estadoPromo='aprobada' WHERE codPromo='$codPromo'";   
+    }
+    elseif($accion == 'denegar'){
+        $consultaSQL = "UPDATE promociones SET estadoPromo='denegada' WHERE codPromo='$codPromo'";     
+    }
+    elseif($accion == 'eliminar'){
+        $consultaSQL = "DELETE FROM promociones WHERE codPromo='$codPromo'";    
+    }
+
+    if($consultaSQL != ''){
+        $resultado = mysqli_query($conexion,$consultaSQL);
+        return $resultado;
+    }
+    
+    return false;
+}
+
 ?>
