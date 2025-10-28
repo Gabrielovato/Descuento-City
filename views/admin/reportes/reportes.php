@@ -25,8 +25,8 @@ $resultado_reporte = mysqli_query($conexion, $sql_reporte);
     <title>Reportes Gerenciales</title>
 </head>
 <body>
-    <div class="tabla__dueños" style="margin: 20px;">
-        <h1 style="text-align: left; margin-left: 10px;">Reporte de Uso de Descuentos </h1>
+    <div class="tabla__dueños" style="margin: 20px auto; max-width: 900px;">
+        <h1 style="text-align: center;">Reporte de Uso de Descuentos </h1>
         <table>
             <caption>Uso de promociones por local</caption>
             <thead>
@@ -44,7 +44,8 @@ $resultado_reporte = mysqli_query($conexion, $sql_reporte);
                         <tr>
                             <td><?= htmlspecialchars($reporte['nombreLocal'])?></td>
                             <td><?= htmlspecialchars($reporte['textoPromo'])?></td>
-                            <td><?= htmlspecialchars($reporte['totalUsos'])?></td>
+                            <td><strong><?= htmlspecialchars($reporte['totalUsos'])?></strong></td>
+                        </tr>
                 <?php
                     }
 
