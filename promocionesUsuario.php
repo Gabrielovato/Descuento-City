@@ -28,9 +28,9 @@ $sql_promos = "SELECT p.*, l.nombreLocal, l.rubroLocal, i.rutaArchivo
             LEFT JOIN imagenes i ON i.idIdentidad = p.codPromo AND i.tipoImg = 'portada'
             WHERE p.estadoPromo = 'aprobada'
             AND l.estadoLocal = 'activo'
-            AND '$hoy' BETWEEN p.fechaDesde AND p.fechaHasta
+            AND '$hoy' BETWEEN p.fechaDesdePromo AND p.fechaHastaPromo
             AND (p.diasSemana LIKE '%$dia_semana%' OR p.diasSemana = '' OR p.diasSemana IS NULL)
-            ORDER BY p.fechaDesde DESC";
+            ORDER BY p.fechaDesdePromo DESC";
 
 $resultado_promos = mysqli_query($conexion, $sql_promos);
 
@@ -96,7 +96,7 @@ if (!$resultado_promos) {
                             <p class="card-text"><?= htmlspecialchars($promo['textoPromo']) ?></p>
                             <p class="card-text">
                                 <small class="text-muted">
-                                    <i class="fas fa-calendar"></i> Hasta :<?=$promo['fechaHasta'] ?> 
+                                    <i class="fas fa-calendar"></i> Hasta :<?=$promo['fechaHastaPromo'] ?> 
                                 </small>
                             </p>
                             <form action="usoPromocionController.php">
