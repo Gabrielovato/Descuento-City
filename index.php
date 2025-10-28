@@ -21,6 +21,8 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
 <body>
     <?php include("includes/header.php");?>
 
+    <!-- CARRUSEL -->
+
     <section class="carrusel">
         <div class="carrusel">
             <div class="container">
@@ -43,6 +45,8 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
         </div>
     </section>
 
+    <!-- LOCALES -->
+
     <section class="locales" id="locales">
         
         <h2>Locales</h2>
@@ -63,30 +67,37 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
         ?>
     </section>
 
+
+    <!-- PROMOCIONES -->
+
     </section>
     <section class="promociones" id="promociones" id="novedades">
         <h2>Promociones Y novedades</h2>
         <div class="card promo-card">Promociones</div>
         <div class="card promo-card">Novedades</div>
 
-    <?php
-    if ($resultado_novedades && mysqli_num_rows($resultado_novedades) > 0) {
-        while ($novedad = mysqli_fetch_assoc($resultado_novedades)) {
-            echo '<div class="card local">'; 
-            echo '<h3> Novedad </h3>';
-            echo '<p>' . htmlspecialchars($novedad['textoNovedad']) . '</p>';
-            echo '<small> Válido hasta: '. htmlspecialchars($novedad['fechaHastaNovedad']) .'</small>';
+        <?php
+        if ($resultado_novedades && mysqli_num_rows($resultado_novedades) > 0) {
+            while ($novedad = mysqli_fetch_assoc($resultado_novedades)) {
+                echo '<div class="card local">'; 
+                echo '<h3> Novedad </h3>';
+                echo '<p>' . htmlspecialchars($novedad['textoNovedad']) . '</p>';
+                echo '<small> Válido hasta: '. htmlspecialchars($novedad['fechaHastaNovedad']) .'</small>';
+                echo '</div>';
+            }
+        
+        } else {
+            echo '<div class="card promo-card">';
+            echo '<h3> Novedades </h3>';
+            echo '<p>No hay novedades disponibles en este momento.</p>';
             echo '</div>';
         }
-    
-    } else {
-        echo '<div class="card promo-card">';
-        echo '<h3> Novedades </h3>';
-        echo '<p>No hay novedades disponibles en este momento.</p>';
-        echo '</div>';
-    }
-    ?>
+        ?>
     </section>
+
+
+    <!-- FOOTER -->
+     
     <?php
     include("includes/footer.php");
     ?>  

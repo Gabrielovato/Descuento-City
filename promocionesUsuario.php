@@ -54,8 +54,10 @@ if (!$resultado_promos) {
 <body>
 <?php include("includes/header.php"); ?>
 
+<img src="/Descuento-City/assets/img/promociones-portada.png" class="img-fluid" alt="...">
+
 <div class="container my-4">
-    <h2>Promociones Vigentes</h2>
+
     <!-- Filtros -->
     <form class="row mb-3" method="GET">
         <div class="col-md-6">
@@ -84,7 +86,7 @@ if (!$resultado_promos) {
                                 <span class="text-muted"><i class="fas fa-image"></i> Sin portada</span>
                             </div>
                         <?php endif; ?>
-                        <div class="card-body bg-light">
+                        <div class="card-body card-color">
                             <h5 class="card-title">
                                 <i class="fas fa-store"></i> <?= htmlspecialchars($promo['nombreLocal']) ?>
                             </h5>
