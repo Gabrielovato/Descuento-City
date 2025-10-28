@@ -94,7 +94,7 @@ include("../../../conexionBD.php");
         }
         echo "</table>"; 
 
-        mysqli_free_result($listaDueños);
+        mysqli_free_result($listaDueños); //libera la memoria que fue utilizada por un resultado de consulta de base de datos
     
         mysqli_close($conexion);
 
