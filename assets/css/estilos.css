@@ -435,7 +435,41 @@ img {
     font-size: 16px;
 }
 
+/* CARRUSEL */
+.carousel {
+    margin-bottom: 2rem;
+}
 
+.carousel-item video {
+    border-radius: 8px;
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.carousel-caption h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.carousel-caption p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-size: 20px 20px;
+}
 
 /* FOOTER */
 
