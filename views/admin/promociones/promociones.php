@@ -98,10 +98,10 @@ include("../../../conexionBD.php");
             </td>
             <td>
                 <div style="background-color: #e8f5e8; padding: 2px 5px; border-radius: 3px; margin-bottom: 2px;">
-                    Desde: <?= $promo["fechaDesde"] ?>
+                    Desde: <?= $promo["fechaDesdePromo"] ?>
                 </div>
                 <div style="background-color: #ffe8e8; padding: 2px 5px; border-radius: 3px;">
-                    Hasta: <?= $promo["fechaHasta"] ?>
+                    Hasta: <?= $promo["fechaHastaPromo"] ?>
                 </div>
             </td>
             <td> <?= $promo["categoriaCliente"] ?></td>

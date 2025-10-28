@@ -20,7 +20,7 @@
                 <li class="header__nav-item"><a href="/Descuento-City/views/admin/locales/locales.php">Locales</a></li>
                 <li class="header__nav-item"><a href="/Descuento-City/views/admin/promociones/promociones.php">Promociones</a></li>
                 <li class="header__nav-item"><a href="/Descuento-City/views/admin/novedades/novedades.php">Novedades</a></li>
-                <li class="header__nav-item"><a href="#contacto">Reportes</a></li>
+                <li class="header__nav-item"><a href="/DesCuento-City/views/admin/reportes/reportes.php">Reportes</a></li>
                 <li class="header__nav-item"><a href="/Descuento-City/views/auth/logout.php">Cerrar sesion</a></li>
             </ul>  
         </nav>
