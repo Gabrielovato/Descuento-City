@@ -30,6 +30,12 @@ ORDER BY fechaDesdeNovedad DESC
 
 $resultado_novedades = mysqli_query($conexion, $sql_novedades);
 
+// Verificar si hay error en la consulta
+if (!$resultado_novedades) {
+    die("Error en la consulta: " . mysqli_error($conexion));
+}
+
+
 ?>
 
 
