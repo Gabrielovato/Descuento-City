@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include("conexionBD.php");
 
 date_default_timezone_set('America/Argentina/Buenos_Aires');
@@ -58,6 +60,38 @@ if (!$resultado_promos) {
 
 <div class="container my-4">
 
+    <?php
+    // Sistema de alertas categorizado
+    if(isset($_SESSION['mensaje_exito'])){
+        echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>";
+        echo "<i class='fas fa-check-circle'></i> ".$_SESSION['mensaje_exito'];
+        echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+        echo "</div>";
+        unset($_SESSION['mensaje_exito']);
+    }
+    if(isset($_SESSION['mensaje_error'])){
+        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>";
+        echo "<i class='fas fa-exclamation-circle'></i> ".$_SESSION['mensaje_error'];
+        echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+        echo "</div>";
+        unset($_SESSION['mensaje_error']);
+    }
+    if(isset($_SESSION['mensaje_warning'])){
+        echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>";
+        echo "<i class='fas fa-exclamation-triangle'></i> ".$_SESSION['mensaje_warning'];
+        echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+        echo "</div>";
+        unset($_SESSION['mensaje_warning']);
+    }
+    if(isset($_SESSION['mensaje_info'])){
+        echo "<div class='alert alert-info alert-dismissible fade show' role='alert'>";
+        echo "<i class='fas fa-info-circle'></i> ".$_SESSION['mensaje_info'];
+        echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+        echo "</div>";
+        unset($_SESSION['mensaje_info']);
+    }
+    ?>
+
     <!-- Filtros -->
     <form class="row mb-3" method="GET">
         <div class="col-md-6">
@@ -99,8 +133,9 @@ if (!$resultado_promos) {
                                     <i class="fas fa-calendar"></i> Hasta :<?=$promo['fechaHastaPromo'] ?> 
                                 </small>
                             </p>
-                            <form action="usoPromocionController.php">
-                                <input type="sumbit"  class="btn btn-outline-success" name="usar" value="Usar promocion">       
+                            <form action="controllers/promocionesCtrl/usoPromocionController.php" method="POST">
+                                <input type="hidden" name="codPromo" value="<?= $promo['codPromo']?>">
+                                <input type="submit" class="btn btn-outline-success" name="usar" value="Usar promoción">       
                             </form>
                         </div>
                     </div>
