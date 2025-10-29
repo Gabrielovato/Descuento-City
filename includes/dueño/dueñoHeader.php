@@ -12,7 +12,7 @@
 <body>
     <header class="header">
         <div class="header_log-container">
-            <a href="/Descuento-City/includes/dueño/dueñoHeader.php"><img src="/Descuento-City/assets/img/logo_descuento_city_100px_white.png" alt="logo"></a>
+            <a href="/Descuento-City/includes/dueño/dueñoHeader.php"><img src="/Descuento-City/assets/img/logo/LOGO1.png" alt="logo"></a>
         </div>
         <nav class="header__nav">
             <ul class="header__nav-list">

@@ -193,34 +193,35 @@ include("../../conexionBD.php");
                 <input class="button-form" type="submit" name="confirm" value="Crear promocion">
             </form>
             <?php
-
-            // Sistema de mensajes organizados
+            // Sistema de alertas categorizado
             if(isset($_SESSION['mensaje_exito'])){
-                echo "<div class='alert alert-success'><p>".$_SESSION['mensaje_exito']."</p></div>";
+                echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>";
+                echo "<i class='fas fa-check-circle'></i> ".$_SESSION['mensaje_exito'];
+                echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+                echo "</div>";
                 unset($_SESSION['mensaje_exito']);
             }
-            
             if(isset($_SESSION['mensaje_error'])){
-                echo "<div class='alert alert-danger'><p>".$_SESSION['mensaje_error']."</p></div>";
+                echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>";
+                echo "<i class='fas fa-exclamation-circle'></i> ".$_SESSION['mensaje_error'];
+                echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+                echo "</div>";
                 unset($_SESSION['mensaje_error']);
             }
-            
             if(isset($_SESSION['mensaje_warning'])){
-                echo "<div class='alert alert-warning'><p>".$_SESSION['mensaje_warning']."</p></div>";
+                echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>";
+                echo "<i class='fas fa-exclamation-triangle'></i> ".$_SESSION['mensaje_warning'];
+                echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+                echo "</div>";
                 unset($_SESSION['mensaje_warning']);
             }
-            
             if(isset($_SESSION['mensaje_info'])){
-                echo "<div class='alert alert-info'><p>".$_SESSION['mensaje_info']."</p></div>";
+                echo "<div class='alert alert-info alert-dismissible fade show' role='alert'>";
+                echo "<i class='fas fa-info-circle'></i> ".$_SESSION['mensaje_info'];
+                echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+                echo "</div>";
                 unset($_SESSION['mensaje_info']);
             }
-
-            // Mensaje legacy (por compatibilidad)
-            if(isset($_SESSION['mensaje'])){
-                echo "<div class='alert alert-success'><p>".$_SESSION['mensaje']."</p></div>";
-                unset($_SESSION['mensaje']);
-            }
-
             ?>
         </div>
     </div>

@@ -108,13 +108,13 @@ elseif($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["eliminar"])){
 
     if($resultado){
 
-        $_SESSION["mensaje2"] = "Promocion eliminada.";
+        $_SESSION["mensaje_exito"] = "Promocion eliminada.";
         header("location: ../../views/dueño/mis_promos.php");
         exit();
     }
     else{
 
-        $_SESSION["mensaje2"] = "Error al eliminar promocion.";
+        $_SESSION["mensaje_error"] = "Error al eliminar promocion.";
         header("location: ../../views/dueño/mis_promos.php");
         exit();
     }
