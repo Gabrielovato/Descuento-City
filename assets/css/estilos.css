@@ -471,13 +471,5 @@ img {
     background-size: 20px 20px;
 }
 
-/* FOOTER */
+/* FOOTER (está en otro css)*/
 
-footer{
-    background-color: #0F172A;
-    color: #eee;
-    width: 100%;
-    height: 20vh;
-    align-content: center;
-    margin-top: auto;
-}
