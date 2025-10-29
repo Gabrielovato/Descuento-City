@@ -96,8 +96,8 @@ CREATE TABLE `novedades` (
 CREATE TABLE `promociones` (
   `codPromo` int(11) NOT NULL,
   `textoPromo` varchar(200) NOT NULL,
-  `fechaDesde` date NOT NULL,
-  `fechaHasta` date NOT NULL,
+  `fechaDesdePromo` date NOT NULL,
+  `fechaHastaPromo` date NOT NULL,
   `categoriaCliente` enum('Inicial','Medium','Premium') NOT NULL,
   `diasSemana` set('Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo') DEFAULT NULL,
   `estadoPromo` enum('pendiente','aprobada','denegada') NOT NULL DEFAULT 'pendiente',

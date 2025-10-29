@@ -69,8 +69,7 @@ include("../../conexionBD.php");
             <th>Codigo</th>
             <th>Descripcion</th>
             <th>Portada</th>
-            <th>fecha Desde</th>
-            <th>fecha Hasta</th>
+            <th>fechas</th>
             <th>Cat Cliente</th>
             <th>Dias semana</th>
             <th>Estado</th>
@@ -101,8 +100,14 @@ include("../../conexionBD.php");
                     <span style="color: gray;">Sin portada</span>
                 <?php endif; ?>
             </td>
-            <td> <?= $fila["fechaDesde"]?></td>
-            <td> <?= $fila["fechaHasta"]?></td>
+            <td>
+                <div style="background-color: #e8f5e8; padding: 2px 5px; border-radius: 3px; margin-bottom: 2px;">
+                    Desde: <?= $fila["fechaDesdePromo"] ?>
+                </div>
+                <div style="background-color: #ffe8e8; padding: 2px 5px; border-radius: 3px;">
+                    Hasta: <?= $fila["fechaHastaPromo"] ?>
+                </div>
+            </td>
             <td> <?= $fila["categoriaCliente"]?></td>
             <td> <?= $fila["diasSemana"]?></td>
             <td> <?= ucfirst($fila["estadoPromo"])?></td>
