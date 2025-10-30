@@ -73,7 +73,7 @@ if (!$resultado_promos) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promociones</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/Descuento-City/assets/css/estilos.css">
     <link rel="icon" type="image/png" href="assets/img/logo-ventana/logo-fondo-b-circular.png"/>
 </head>
@@ -88,28 +88,28 @@ if (!$resultado_promos) {
     //Mensajes
     if(isset($_SESSION['mensaje_exito'])){
         echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>";
-        echo "<i class='fas fa-check-circle'></i> ".$_SESSION['mensaje_exito'];
+        echo "<i class='bi bi-check-circle'></i> ".$_SESSION['mensaje_exito'];
         echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
         echo "</div>";
         unset($_SESSION['mensaje_exito']);
     }
     if(isset($_SESSION['mensaje_error'])){
         echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>";
-        echo "<i class='fas fa-exclamation-circle'></i> ".$_SESSION['mensaje_error'];
+        echo "<i class='bi bi-exclamation-circle-fill'></i> ".$_SESSION['mensaje_error'];
         echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
         echo "</div>";
         unset($_SESSION['mensaje_error']);
     }
     if(isset($_SESSION['mensaje_warning'])){
         echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>";
-        echo "<i class='fas fa-exclamation-triangle'></i> ".$_SESSION['mensaje_warning'];
+        echo "<i class='bi bi-exclamation-triangle-fill'></i> ".$_SESSION['mensaje_warning'];
         echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
         echo "</div>";
         unset($_SESSION['mensaje_warning']);
     }
     if(isset($_SESSION['mensaje_info'])){
         echo "<div class='alert alert-info alert-dismissible fade show' role='alert'>";
-        echo "<i class='fas fa-info-circle'></i> ".$_SESSION['mensaje_info'];
+        echo "<i class='bi bi-info-circle-fill'></i> ".$_SESSION['mensaje_info'];
         echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
         echo "</div>";
         unset($_SESSION['mensaje_info']);
@@ -125,16 +125,16 @@ if (!$resultado_promos) {
 
             if($categoria_cliente == 'premium'){
 
-                $icono_cliente = 'fas fa-crown text-warning';
+                $icono_cliente = 'bi bi-gem text-warning';
                 $color_cliente = 'text-warning';
             }
             elseif($categoria_cliente == 'medium'){
-                $icono_cliente = 'fas fa-star text-info';
+                $icono_cliente = 'bi bi-star-fill text-info';
                 $color_cliente = 'text-info';
 
             }
             elseif($categoria_cliente == 'inicial'){
-                $icono_cliente = 'fas fa-circle text-secondary';
+                $icono_cliente = 'bi bi-circle-fill text-secondary';
 
             }
 
@@ -174,13 +174,13 @@ if (!$resultado_promos) {
                         <img src="/Descuento-City/<?= htmlspecialchars($promo["rutaArchivo"]) ?>" class="card-img-top" alt="portada promocion" style="height: 200px; object-fit: cover;"> 
                         <?php else: ?>
                             <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 200px;">
-                                <span class="text-muted"><i class="fas fa-image"></i> Sin portada</span>
+                                <span class="text-muted"><i class="bi bi-image"></i> Sin portada</span>
                             </div>
                         <?php endif; ?>
                         <div class="card-body card-color">
                             <div class="d-flex justify-content-between align-items-start mb-2">
                                 <h5 class="card-title mb-0">
-                                    <i class="fas fa-store"></i> <?= htmlspecialchars($promo['nombreLocal']) ?>
+                                    <i class="bi bi-shop"></i> <?= htmlspecialchars($promo['nombreLocal']) ?>
                                 </h5>
                                 <?php 
 
@@ -191,16 +191,16 @@ if (!$resultado_promos) {
                                 switch($categoria_promo) {
                                     case 'premium':
                                         $color = 'bg-warning text-dark';
-                                        $icono = 'fas fa-crown';
+                                        $icono = 'bi bi-gem';
                                         break;
                                     case 'medium':
                                         $color= 'bg-info';
-                                        $icono = 'fas fa-star';
+                                        $icono = 'bi bi-star-fill';
                                         break;
                                     case 'inicial':
                                     default:
                                         $color = 'bg-secondary';
-                                        $icono = 'fas fa-circle';
+                                        $icono = 'bi bi-circle-fill';
                                         break;
                                 }
                                 ?>
@@ -214,7 +214,7 @@ if (!$resultado_promos) {
                             <p class="card-text"><?= htmlspecialchars($promo['textoPromo']) ?></p>
                             <p class="card-text">
                                 <small class="text-muted">
-                                    <i class="fas fa-calendar"></i> Hasta: <?=$promo['fechaHastaPromo'] ?> 
+                                    <i class="bi bi-calendar3"></i> Hasta: <?=$promo['fechaHastaPromo'] ?> 
                                 </small>
                             </p>
                             <form action="../../controllers/promocionesCtrl/usoPromocionController.php" method="POST">
@@ -230,7 +230,7 @@ if (!$resultado_promos) {
             ?>
             <div class="col-12">
                 <div class="alert alert-info text-center" role="alert">
-                    <i class="fas fa-info-circle"></i> 
+                    <i class="bi bi-info-circle-fill"></i> 
                     <strong>No hay promociones disponibles para tu categoría (<?= ucfirst($categoria_cliente) ?>) en este momento.</strong><br>
                     <small>Las promociones disponibles para ti son de nivel: <?= implode(', ', array_map('ucfirst', $categorias_permitidas)) ?>.</small><br>
                     <small>Vuelve pronto para ver las últimas ofertas y descuentos.</small>

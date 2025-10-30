@@ -15,7 +15,7 @@ include("../../../conexionBD.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Descuento-City/assets/css/estilos.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <title>Promociones</title>
 </head>
 <body>
@@ -113,16 +113,16 @@ include("../../../conexionBD.php");
                 switch($categoria) {
                     case 'Premium':
                         $badge_class = 'bg-warning text-dark';
-                        $icon = 'fas fa-crown';
+                        $icon = 'bi bi-gem';
                         break;
                     case 'Medium':
                         $badge_class = 'bg-info';
-                        $icon = 'fas fa-star';
+                        $icon = 'bi bi-star-fill';
                         break;
                     case 'Inicial':
                     default:
                         $badge_class = 'bg-secondary';
-                        $icon = 'fas fa-circle';
+                        $icon = 'bi bi-circle-fill';
                         break;
                 }
                 ?>
@@ -179,36 +179,50 @@ include("../../../conexionBD.php");
             echo "<a href='promociones.php?pagina=$i' class='btn btn-outline-primary btn-sm mx-1' id='paginacion'>$i</a>";
         }
     }
-    echo "</div>";?>
+    echo "</div>";
 
-    <!-- Mensajes de alerta -->
-    <?php if(isset($_SESSION['mensaje_exito'])): ?>
-        <div class="alert alert-success">
-            <p><?= $_SESSION['mensaje_exito'] ?></p>
-        </div>
-        <?php unset($_SESSION['mensaje_exito']); ?>
-    <?php endif; ?>
 
-    <?php if(isset($_SESSION['mensaje_error'])): ?>
-        <div class="alert alert-danger">
-            <p><?= $_SESSION['mensaje_error'] ?></p>
-        </div>
-        <?php unset($_SESSION['mensaje_error']); ?>
-    <?php endif; ?>
+    // Sistema de alertas categorizado
+    if(isset($_SESSION['mensaje_exito'])){
+        echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>";
+        echo "<i class='bi bi-check-circle'></i> ".$_SESSION['mensaje_exito'];
+        echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+        echo "</div>";
+        unset($_SESSION['mensaje_exito']);
+    }
+    if(isset($_SESSION['mensaje_error'])){
+        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>";
+        echo "<i class='bi bi-exclamation-circle-fill'></i> ".$_SESSION['mensaje_error'];
+        echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+        echo "</div>";
+        unset($_SESSION['mensaje_error']);
+    }
+    if(isset($_SESSION['mensaje_warning'])){
+        echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>";
+        echo "<i class='bi bi-exclamation-triangle-fill'></i> ".$_SESSION['mensaje_warning'];
+        echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+        echo "</div>";
+        unset($_SESSION['mensaje_warning']);
+    }
+    if(isset($_SESSION['mensaje_info'])){
+        echo "<div class='alert alert-info alert-dismissible fade show' role='alert'>";
+        echo "<i class='bi bi-info-circle-fill'></i> ".$_SESSION['mensaje_info'];
+        echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+        echo "</div>";
+        unset($_SESSION['mensaje_info']);
+    }
+    
+    // Compatibilidad con mensaje simple (por si algún controlador aún no está actualizado)
+    if(isset($_SESSION["mensaje"])){
+        echo "<div class='alert alert-info alert-dismissible fade show' role='alert'>";
+        echo "<i class='bi bi-info-circle-fill'></i> " . $_SESSION['mensaje'];
+        echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+        echo "</div>";
+        unset($_SESSION['mensaje']);
+    }
+    ?>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-    <?php if(isset($_SESSION['mensaje_warning'])): ?>
-        <div class="alert alert-warning">
-            <p><?= $_SESSION['mensaje_warning'] ?></p>
-        </div>
-        <?php unset($_SESSION['mensaje_warning']); ?>
-    <?php endif; ?>
-
-    <?php if(isset($_SESSION['mensaje_info'])): ?>
-        <div class="alert alert-info">
-            <p><?= $_SESSION['mensaje_info'] ?></p>
-        </div>
-        <?php unset($_SESSION['mensaje_info']); ?>
-    <?php endif; ?>
-    </div>
 </body>
 </html>

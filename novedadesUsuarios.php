@@ -46,7 +46,7 @@ if (!$resultado_novedades) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novedades</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/estilos.css">
     <link rel="icon" type="image/png" href="assets/img/logo-ventana/logo-fondo-b-circular.png"/>
 
@@ -72,7 +72,7 @@ if (!$resultado_novedades) {
                         <img src="<?= htmlspecialchars($novedad["rutaArchivo"]) ?>" class="card-img-top" alt="portada novedad" style="height: 200px; object-fit: cover;"> 
                         <?php else: ?>
                             <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 200px;">
-                                <span class="text-muted"><i class="fas fa-image"></i> Sin portada</span>
+                                <span class="text-muted"><i class="bi bi-image"></i> Sin portada</span>
                             </div>
                         <?php endif; ?>
                         <div class="card-body card-color">
@@ -80,7 +80,7 @@ if (!$resultado_novedades) {
                             <p class="card-text"><?= htmlspecialchars($novedad['textoNovedad']) ?></p>
                             <p class="card-text">
                                 <small class="text-muted">
-                                    <i class="fas fa-calendar"></i> Hasta :<?=$novedad['fechaHastaNovedad'] ?> 
+                                    <i class="bi bi-calendar3"></i> Hasta :<?=$novedad['fechaHastaNovedad'] ?> 
                                 </small>
                             </p>
                             <form action=""> <!--agregar ruta -->
@@ -95,7 +95,7 @@ if (!$resultado_novedades) {
             ?>
             <div class="col-12">
                 <div class="alert alert-info text-center" role="alert">
-                    <i class="fas fa-info-circle"></i> 
+                    <i class="bi bi-info-circle-fill"></i> 
                     <strong>No hay novedadees disponibles</strong><br>
                     <small>Vuelve pronto para ver las últimas novedades</small>
                 </div>
