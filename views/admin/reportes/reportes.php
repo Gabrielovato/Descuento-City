@@ -23,6 +23,7 @@ $resultado_reporte = mysqli_query($conexion, $sql_reporte);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Descuento-City/assets/css/estilos.css">
     <title>Reportes Gerenciales</title>
+    <link rel="icon" type="image/png" href="assets/img/logo-ventana/logo-fondo-b-circular.png"/>
 </head>
 <body>
     <div class="tabla__dueños" style="margin: 20px auto; max-width: 900px;">
