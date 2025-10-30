@@ -2,13 +2,10 @@
 
 session_start();
 
-// Verificar si el usuario está logueado y es cliente
-if (!isset($_SESSION["codUsuario"]) || !isset($_SESSION["tipoUsuario"]) || $_SESSION["tipoUsuario"] !== "cliente") {
-    header("Location: ../../views/auth/login.php");
-    exit();
-}
 
 include("../../conexionBD.php");
+
+require("../../funciones/funcionesCliente.php");
 
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 
@@ -35,45 +32,32 @@ $codCliente = $_SESSION["codUsuario"];
 $consulta_cliente = "SELECT categoriaCliente FROM usuarios WHERE codUsuario = '$codCliente'";
 $resultado_cliente = mysqli_query($conexion, $consulta_cliente);
 
-if ($resultado_cliente && mysqli_num_rows($resultado_cliente) > 0) {
-    $cliente = mysqli_fetch_assoc($resultado_cliente);
-    $categoria_cliente = $cliente['categoriaCliente'];
-} else {
-    $categoria_cliente = 'inicial'; // Por defecto si no se encuentra
-}
 
-// Definir la lógica de categorías (jerarquía)
-$categorias_permitidas = [];
-switch($categoria_cliente) {
-    case 'premium':
-        $categorias_permitidas = ['inicial', 'medium', 'premium'];
-        break;
-    case 'medium':
-        $categorias_permitidas = ['inicial', 'medium'];
-        break;
-    case 'basico':
-    default:
-        $categorias_permitidas = ['basico'];
-        break;
-}
+$cliente = mysqli_fetch_assoc($resultado_cliente);
 
-// Crear la condición SQL para las categorías
+$categoria_cliente = $cliente['categoriaCliente'];
+
+
+//Obtengo alcance de la categoria cliente.
+$categorias_permitidas = verificarCategoria($categoria_cliente);
+
+//Creo la condicion. Con implode puedo convertir el array en cadena.
 $condicion_categorias = "'" . implode("','", $categorias_permitidas) . "'";
 
-// Consulta optimizada para promociones vigentes con filtro de categoría
-$sql_promos = "SELECT p.*, l.nombreLocal, l.rubroLocal, i.rutaArchivo 
-            FROM promociones p
-            JOIN locales l ON p.codLocal = l.codLocal
-            LEFT JOIN imagenes i ON i.idIdentidad = p.codPromo AND i.tipoImg = 'portada'
 
-            WHERE p.estadoPromo = 'aprobada'
+$consultaPromos = "SELECT p.*, l.nombreLocal, l.rubroLocal, i.rutaArchivo /*Selecciono todos los campos promociones*/ 
+            FROM promociones p /*Obtengo datos de tabla promociones*/ 
+            JOIN locales l ON p.codLocal = l.codLocal /* Comparap con l.codLocal para obtener datos*/
+            LEFT JOIN imagenes i ON i.idIdentidad = p.codPromo AND i.tipoImg = 'portada' /*Uno con imagenes*/
+
+            WHERE p.estadoPromo = 'aprobada' 
             AND l.estadoLocal = 'activo'
-            AND '$hoy' BETWEEN p.fechaDesde AND p.fechaHasta
+            AND '$hoy' BETWEEN p.fechaDesdePromo AND p.fechaHastaPromo
             AND (p.diasSemana LIKE '%$dia_semana%' OR p.diasSemana = '' OR p.diasSemana IS NULL)
             AND (p.categoriaCliente IN ($condicion_categorias) OR p.categoriaCliente IS NULL OR p.categoriaCliente = '')
-            ORDER BY p.fechaDesde DESC";
+            ORDER BY p.fechaDesdePromo DESC";
 
-$resultado_promos = mysqli_query($conexion, $sql_promos);
+$resultado_promos = mysqli_query($conexion, $consultaPromos);
 
 // Verificar si hay error en la consulta
 if (!$resultado_promos) {
@@ -87,7 +71,7 @@ if (!$resultado_promos) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promociones - Invitado</title>
+    <title>Promociones</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/Descuento-City/assets/css/estilos.css">
@@ -100,7 +84,7 @@ if (!$resultado_promos) {
 <div class="container my-4">
 
     <?php
-    // Sistema de alertas categorizado
+    //Mensajes
     if(isset($_SESSION['mensaje_exito'])){
         echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>";
         echo "<i class='fas fa-check-circle'></i> ".$_SESSION['mensaje_exito'];
@@ -137,21 +121,22 @@ if (!$resultado_promos) {
             <?php 
             $icono_cliente = '';
             $color_cliente = '';
-            switch($categoria_cliente) {
-                case 'premium':
-                    $icono_cliente = 'fas fa-crown text-warning';
-                    $color_cliente = 'text-warning';
-                    break;
-                case 'medium':
-                    $icono_cliente = 'fas fa-star text-info';
-                    $color_cliente = 'text-info';
-                    break;
-                case 'basico':
-                default:
-                    $icono_cliente = 'fas fa-circle text-secondary';
-                    $color_cliente = 'text-secondary';
-                    break;
+
+            if($categoria_cliente == 'premium'){
+
+                $icono_cliente = 'fas fa-crown text-warning';
+                $color_cliente = 'text-warning';
             }
+            elseif($categoria_cliente == 'medium'){
+                $icono_cliente = 'fas fa-star text-info';
+                $color_cliente = 'text-info';
+
+            }
+            elseif($categoria_cliente == 'inicial'){
+                $icono_cliente = 'fas fa-circle text-secondary';
+
+            }
+
             ?>
             <i class="<?= $icono_cliente ?> me-2"></i>
             <span>
@@ -197,28 +182,29 @@ if (!$resultado_promos) {
                                     <i class="fas fa-store"></i> <?= htmlspecialchars($promo['nombreLocal']) ?>
                                 </h5>
                                 <?php 
-                                // Mostrar badge de categoría de la promoción
-                                $categoria_promo = !empty($promo['categoriaPromo']) ? $promo['categoriaPromo'] : 'basico';
-                                $badge_class = '';
-                                $badge_icon = '';
+
+                                // Mostrar categoria
+                                $categoria_promo = !empty($promo['categoriaCliente']) ? $promo['categoriaCliente'] : 'inicial';
+                                $color = '';
+                                $icono = '';
                                 switch($categoria_promo) {
                                     case 'premium':
-                                        $badge_class = 'bg-warning text-dark';
-                                        $badge_icon = 'fas fa-crown';
+                                        $color = 'bg-warning text-dark';
+                                        $icono = 'fas fa-crown';
                                         break;
                                     case 'medium':
-                                        $badge_class = 'bg-info';
-                                        $badge_icon = 'fas fa-star';
+                                        $color= 'bg-info';
+                                        $icono = 'fas fa-star';
                                         break;
-                                    case 'basico':
+                                    case 'inicial':
                                     default:
-                                        $badge_class = 'bg-secondary';
-                                        $badge_icon = 'fas fa-circle';
+                                        $color = 'bg-secondary';
+                                        $icono = 'fas fa-circle';
                                         break;
                                 }
                                 ?>
-                                <span class="badge <?= $badge_class ?> small">
-                                    <i class="<?= $badge_icon ?>"></i> <?= ucfirst($categoria_promo) ?>
+                                <span class="badge <?= $color ?> small">
+                                    <i class="<?= $icono ?>"></i> <?= ucfirst($categoria_promo) ?>
                                 </span>
                             </div>
                             <h6 class="card-subtitle mb-2 text-muted">
@@ -227,7 +213,7 @@ if (!$resultado_promos) {
                             <p class="card-text"><?= htmlspecialchars($promo['textoPromo']) ?></p>
                             <p class="card-text">
                                 <small class="text-muted">
-                                    <i class="fas fa-calendar"></i> Hasta :<?=$promo['fechaHasta'] ?> 
+                                    <i class="fas fa-calendar"></i> Hasta: <?=$promo['fechaHastaPromo'] ?> 
                                 </small>
                             </p>
                             <form action="../../controllers/promocionesCtrl/usoPromocionController.php" method="POST">

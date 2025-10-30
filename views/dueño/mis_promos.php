@@ -24,7 +24,7 @@ include("../../conexionBD.php");
 
     //paginacion
 
-    $cant_por_pag =3;
+    $cant_por_pag =5;
     $pagina = isset($_GET["pagina"]) ? $_GET["pagina"] : 1;
     if(!$pagina){
 
@@ -123,20 +123,7 @@ include("../../conexionBD.php");
         </tr>
     <?php
     }
-    echo "</table>";?>
-
-    
-
-    <?php if(isset($_SESSION['mensaje2'])): ?>
-        <div class="alert alert-success" role="alert">
-            <?php
-            echo "<p>".$_SESSION['mensaje2']."</p>";
-            unset($_SESSION['mensaje2']);?>
-        </div>
-    <?php endif;?>
-
-    <?php
-
+    echo "</table>";
 
     mysqli_free_result($listaPromociones);
 
@@ -163,11 +150,11 @@ include("../../conexionBD.php");
 
                 <!-- Fecha Desde  -->
                 <label>Fecha Desde :</label>
-                <input type="date" name="fechaDesde" required>
+                <input type="date" name="fechaDesdePromo" required>
 
                 <!-- Fecha Hasta  -->
                 <label>Fecha Hasta :</label>
-                <input type="date" name="fechaHasta" required><br>
+                <input type="date" name="fechaHastaPromo" required><br>
 
                 <!-- Dias de semana que estara disponible  -->
                 <label>Disponibilidad semanal:</label><br>

@@ -8,8 +8,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
 
 
     $textoPromo = trim(filter_input(INPUT_POST,"textoPromo",FILTER_SANITIZE_SPECIAL_CHARS));
-    $fechaDesde = trim(filter_input(INPUT_POST,"fechaDesde",FILTER_SANITIZE_SPECIAL_CHARS));
-    $fechaHasta = trim(filter_input(INPUT_POST,"fechaHasta",FILTER_SANITIZE_SPECIAL_CHARS));
+    $fechaDesde = trim(filter_input(INPUT_POST,"fechaDesdePromo",FILTER_SANITIZE_SPECIAL_CHARS));
+    $fechaHasta = trim(filter_input(INPUT_POST,"fechaHastaPromo",FILTER_SANITIZE_SPECIAL_CHARS));
     $diasSemana = isset($_POST["diasSemana"]) ? implode(',', $_POST["diasSemana"]) : ''; //implode convierte array en string
     $catCliente = trim(filter_input(INPUT_POST,"categoriaCliente",FILTER_SANITIZE_SPECIAL_CHARS));
     $img = $_FILES["imgPromo"] ?? null;
@@ -34,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["confirm"])){
         
 
         //inserto datos de promocion.
-        $consultaPromo = "INSERT INTO promociones (textoPromo,fechaDesde,fechaHasta,categoriaCliente,diasSemana,codLocal) VALUES ('$textoPromo','$fechaDesde','$fechaHasta','$catCliente','$diasSemana',$codLocal)";
+        $consultaPromo = "INSERT INTO promociones (textoPromo,fechaDesdePromo,fechaHastaPromo,categoriaCliente,diasSemana,codLocal) VALUES ('$textoPromo','$fechaDesde','$fechaHasta','$catCliente','$diasSemana',$codLocal)";
 
         $resultadoInsert = mysqli_query($conexion,$consultaPromo);
 

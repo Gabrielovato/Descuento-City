@@ -15,6 +15,7 @@ include("../../../conexionBD.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Descuento-City/assets/css/estilos.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Promociones</title>
 </head>
 <body>
@@ -78,7 +79,7 @@ include("../../../conexionBD.php");
     while($promo = mysqli_fetch_assoc($listaPromociones)){
         ?>
         <tr>
-            <td> <?= $promo["codLocal"] ?></td>
+            <td> #<?= $promo["codLocal"] ?></td>
             <td> <?= $promo["textoPromo"] ?></td>
             <td>
                 <?php 
@@ -104,7 +105,31 @@ include("../../../conexionBD.php");
                     Hasta: <?= $promo["fechaHastaPromo"] ?>
                 </div>
             </td>
-            <td> <?= $promo["categoriaCliente"] ?></td>
+            <td>
+                <?php
+                $categoria = $promo['categoriaCliente'];
+                $badge_class = '';
+                $icon = '';
+                switch($categoria) {
+                    case 'Premium':
+                        $badge_class = 'bg-warning text-dark';
+                        $icon = 'fas fa-crown';
+                        break;
+                    case 'Medium':
+                        $badge_class = 'bg-info';
+                        $icon = 'fas fa-star';
+                        break;
+                    case 'Inicial':
+                    default:
+                        $badge_class = 'bg-secondary';
+                        $icon = 'fas fa-circle';
+                        break;
+                }
+                ?>
+                <span class="badge <?= $badge_class ?>">
+                    <i class="<?= $icon ?>"></i> <?= $categoria ?>
+                </span>
+            </td>
             <td> 
                 <?php
                     //Si esta disponible toda la semana.

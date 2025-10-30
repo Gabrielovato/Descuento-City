@@ -61,7 +61,7 @@ require("../../../funciones/funcionesSQL.php");
     while($fila = mysqli_fetch_assoc($listaLocales)){
         ?>
         <tr>
-            <td> <?= $fila["codLocal"]?></td>
+            <td> #<?= $fila["codLocal"]?></td>
             <td> <?= $fila["nombreLocal"]?></td>
             <!-- Logo -->
             <td>
@@ -73,8 +73,27 @@ require("../../../funciones/funcionesSQL.php");
             </td>
             <td> <?= $fila["ubicacionLocal"]?></td>
             <td> <?= $fila["rubroLocal"]?></td>
-            <td> <?= $fila["codUsuario"]?></td>
-            <td> <?= ucfirst($fila["estadoLocal"])?></td>
+            <td> #<?= $fila["codUsuario"]?></td>
+            <td>
+                <?php
+                $estado = $fila['estadoLocal'];
+                $estado_class = '';
+                $estado_icon = '';
+                switch($estado) {
+                    case 'activo':
+                        $estado_class = 'bg-success';
+                        $estado_icon = 'fas fa-check';
+                        break;
+                    case 'eliminado':
+                        $estado_class = 'bg-danger';
+                        $estado_icon = 'fas fa-times';
+                        break;
+                }
+                ?>
+                <span class="badge <?= $estado_class ?>">
+                    <i class="<?= $estado_icon ?>"></i> <?= ucfirst($estado) ?>
+                </span>
+            </td>
             <td>
                 <form action="../../../controllers/localesCtrl/localesController.php" method="POST">
 
