@@ -54,52 +54,84 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
 
     <!-- LOCALES -->
 
-    <section class="locales" id="locales">
-        
-        <h2>Locales</h2>
+    <section class="locales" id="locales">        
+        <div class="container">
+
+            <!-- FALTARIA BUSCADOR. -->
+            <h2 class="text-center mb-4">Locales Participantes</h2>
 
         <?php
-        if ($resultado_locales && mysqli_num_rows($resultado_locales) > 0) {
-            while ($local = mysqli_fetch_assoc($resultado_locales)) {
-                echo '<div class="card local-card">';
-                echo '<h3>' . htmlspecialchars($local['nombreLocal']) . '</h3>';
-                echo '<p>' . htmlspecialchars($local['ubicacionLocal']) . '</p>';
+            if ($resultado_locales && mysqli_num_rows($resultado_locales) > 0) {
+                echo '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">';
+                
+                while ($local = mysqli_fetch_assoc($resultado_locales)) {
+                    // Consulta para obtener la imagen del local
+                    $codLocal = $local['codLocal'];
+                    $sql_imagen = "SELECT rutaArchivo FROM imagenes WHERE idIdentidad = '$codLocal' AND tipoImg = 'logo' LIMIT 1";
+                    $resultado_imagen = mysqli_query($conexion, $sql_imagen);
+                    $imagen = mysqli_fetch_assoc($resultado_imagen);
+                    $rutaImagen = $imagen ? $imagen['rutaArchivo'] : '/Descuento-City/assets/img/default-local.jpg';
+                    
+                    echo '<div class="col">';
+                    echo '  <div class="card h-100 shadow-sm">';
+                    echo '    <img src="' . htmlspecialchars($rutaImagen) . '" class="card-img-top" alt="Logo ' . htmlspecialchars($local['nombreLocal']) . '" style="height: 200px; object-fit: cover;">';
+                    echo '    <div class="card-body d-flex flex-column">';
+                    echo '      <h5 class="card-title">' . htmlspecialchars($local['nombreLocal']) . '</h5>';
+                    echo '      <p class="card-text">';
+                    echo '        <small class="text-muted"><i class="bi bi-geo-alt"></i> ' . htmlspecialchars($local['ubicacionLocal']) . '</small><br>';
+                    echo '        <small class="text-muted"><i class="bi bi-tag"></i> ' . htmlspecialchars($local['rubroLocal']) . '</small><br>';
+                    echo '        <small class="text-muted"><i class="bi bi-tag"></i> #' . htmlspecialchars($local['codLocal']) . '</small>';
+                    echo '      </p>';
+                    echo '      <div class="mt-auto">';
+                    echo '        <a href="/Descuento-City/views/locales/localDetalle.php?id=' . $local['codLocal'] . '" class="btn btn-primary btn-sm">Ver promociones</a>';
+                    echo '      </div>';
+                    echo '    </div>';
+                    echo '  </div>';
+                    echo '</div>';
+                }
+                
                 echo '</div>';
-
-            }
-            
-        } else { 
-            echo "<p>No hay locales disponibles en este momento.</p>";
-        }
-        ?>
+            } else { 
+                echo '<div class="text-center">';
+                echo '  <p class="text-muted">No hay locales disponibles en este momento.</p>';
+                echo '</div>';
+            }?>
+        </div>
     </section>
 
 
-    <!-- PROMOCIONES -->
+    <!-- PROMOCIONES Y NOVEDADES. Solo son dos card con un boton que diga ver mas y lo mande a promociones o novedades.-->
+    <!-- Faltaria agregarle una imagen de fondo -->
 
-    </section>
-    <section class="promociones" id="promociones" id="novedades">
-        <h2>Promociones Y novedades</h2>
-        <div class="card promo-card">Promociones</div>
-        <div class="card promo-card">Novedades</div>
-
-        <?php
-        if ($resultado_novedades && mysqli_num_rows($resultado_novedades) > 0) {
-            while ($novedad = mysqli_fetch_assoc($resultado_novedades)) {
-                echo '<div class="card local">'; 
-                echo '<h3> Novedad </h3>';
-                echo '<p>' . htmlspecialchars($novedad['textoNovedad']) . '</p>';
-                echo '<small> Válido hasta: '. htmlspecialchars($novedad['fechaHastaNovedad']) .'</small>';
-                echo '</div>';
-            }
-        
-        } else {
-            echo '<div class="card promo-card">';
-            echo '<h3> Novedades </h3>';
-            echo '<p>No hay novedades disponibles en este momento.</p>';
-            echo '</div>';
-        }
-        ?>
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 text-center">
+                        <div class="card-body d-flex flex-column">
+                            <i class="bi bi-percent display-1 text-primary mb-3"></i>
+                            <h5 class="card-title">PROMOCIONES</h5>
+                            <p class="card-text">Descubre todas las promociones disponibles en nuestros locales participantes.</p>
+                            <div class="mt-auto">
+                                <a href="/Descuento-City/promocionesUsuario.php" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 text-center">
+                        <div class="card-body d-flex flex-column">
+                            <i class="bi bi-newspaper display-1 text-success mb-3"></i>
+                            <h5 class="card-title">NOVEDADES</h5>
+                            <p class="card-text">Mantente al día con las últimas noticias y actualizaciones de Descuento City.</p>
+                            <div class="mt-auto">
+                                <a href="/Descuento-City/novedadesUsuarios.php" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
 
