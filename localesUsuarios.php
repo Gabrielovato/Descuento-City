@@ -1,5 +1,8 @@
 <?php
 include("conexionBD.php");
+//var para rutas
+$breadcrumb_titulo_activo = 'Locales';
+
 //capturo filtros del form POST
 $rubroSeleccionado = $_POST['rubro'] ?? '';
 $nombreSeleccionado = $_POST['local'] ?? '';
@@ -52,9 +55,20 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
 </head>
 <body>
 <?php include("includes/header.php"); ?>
+<!--Para q las rutas queden sobre la imagen en la esquina superior izquierda.-->
+<div class="portada-locales position-relative"> 
 
-<img src="/Descuento-City/assets/img/locales-portada.png" class="img-fluid" alt="...">
+    <img src="/Descuento-City/assets/img/locales-portada.png" class="img-fluid" alt="">
 
+    <div class="breadcrumb-overlay position-absolute top-0 start-0 w-100 text-white p-3">
+        
+        <div class="container small">
+            <?php include 'includes/breadcrumb.php'; ?> 
+        </div>
+        
+    </div>
+    
+</div>
 <div class="container my-4">
     <!--  filtros -->
     <form class="row mb-4" method="POST">

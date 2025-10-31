@@ -1,6 +1,8 @@
 <?php
 
 include("conexionBD.php");
+//variable para rutas de navegacion (breadcrumb)
+$breadcrumb_titulo_activo = 'Novedades';
 
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 
@@ -54,7 +56,21 @@ if (!$resultado_novedades) {
 <body>
     <?php include("includes/header.php"); ?>
 
-<img src="/Descuento-City/assets/img/novedades-portada.png" class="img-fluid" alt="...">
+    <!--Hago q las rutas (breadcrumb) queden sobre la imagen. No encontré otra manera -->
+    <div class="portada-novedades position-relative"> 
+
+    <img src="/Descuento-City/assets/img/novedades-portada.png" class="img-fluid" alt="">
+
+    <div class="breadcrumb-overlay position-absolute top-0 start-0 w-100 text-white p-3">
+        
+        <div class="container small">
+            <?php include 'includes/breadcrumb.php'; ?> 
+        </div>
+        
+    </div>
+    
+</div>
+
 
 <div class="container my-4">
 

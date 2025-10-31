@@ -1,7 +1,9 @@
 <?php
+
 session_start();
 
 include ("conexionBD.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -16,6 +18,11 @@ include ("conexionBD.php");
 <body>
     
     <?php include("includes/header.php"); ?>
+    <!--ruta de navegacion -->
+    <div class="container mt-3 small">
+            <?php include 'includes/breadcrumb.php'; ?> 
+        </div>
+        
 
 
     <?php

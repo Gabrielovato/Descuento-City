@@ -18,6 +18,11 @@ include("../../conexionBD.php");
 </head>
 <body>
     <?php include("../../includes/header.php");?>
+    <!--ruta de navegacion -->
+    <div class="container mt-3 small">
+            <?php include '../../includes/breadcrumb.php'; ?> 
+        </div>
+
     <div class="main-center">
         <div class="form__container">
             <h2>Inicio Sesion</h2>
