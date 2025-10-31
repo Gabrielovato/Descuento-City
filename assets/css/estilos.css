@@ -370,20 +370,34 @@ img {
 
 /* Home locales */
 
+.card-body{
+    background-color: #ccc8;
+
+}
+
 
 /* Home promociones */
 
-.card-color{
-    background-color: #eee;
+.card-body-p{
+    background-color: #ccc8;
 }
 
+
+
+
 /* Home novedades */
+
+.card-body-n{
+    background-color: #ccc8;
+}
 
 
 /* Home servicios */
 
-
-
+/* Promociones */
+.card-color{
+    background-color: #ccc8;
+}
 
 
 

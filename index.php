@@ -63,7 +63,7 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
 
 
 
-            
+
             <h2 class="text-center mb-4">Locales Participantes</h2>
 
         <?php
@@ -85,7 +85,8 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
                     echo '      <h5 class="card-title">' . htmlspecialchars($local['nombreLocal']) . '</h5>';
                     echo '      <p class="card-text">';
                     echo '        <small class="text-muted"><i class="bi bi-geo-alt"></i> ' . htmlspecialchars($local['ubicacionLocal']) . '</small><br>';
-                    echo '        <small class="text-muted"><i class="bi bi-tag"></i> ' . htmlspecialchars($local['rubroLocal']) . '</small>';
+                    echo '        <small class="text-muted"><i class="bi bi-tag"></i> ' . htmlspecialchars($local['rubroLocal']) . '</small><br>';
+                    echo '        <small class="text-muted"><i class="bi bi-tag"></i> #' . htmlspecialchars($local['codLocal']) . '</small>';
                     echo '      </p>';
                     echo '    </div>';
                     echo '  </div>';
@@ -117,7 +118,7 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
             <div class="row g-4">
                 <div class="col-md-6">
                     <div class="card h-100 text-center">
-                        <div class="card-body d-flex flex-column">
+                        <div class="card-body-p d-flex flex-column">
                             <i class="bi bi-percent display-1 text-primary mb-3"></i>
                             <h5 class="card-title">PROMOCIONES</h5>
                             <p class="card-text">Descubre todas las promociones disponibles en nuestros locales participantes.</p>
@@ -129,7 +130,7 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
                 </div>
                 <div class="col-md-6">
                     <div class="card h-100 text-center">
-                        <div class="card-body d-flex flex-column">
+                        <div class="card-body-n d-flex flex-column">
                             <i class="bi bi-newspaper display-1 text-success mb-3"></i>
                             <h5 class="card-title">NOVEDADES</h5>
                             <p class="card-text">Mantente al día con las últimas noticias y actualizaciones de Descuento City.</p>
