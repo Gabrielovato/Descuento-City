@@ -17,38 +17,78 @@ include ("conexionBD.php");
     
     <?php include("includes/header.php"); ?>
 
-    <div class="main-center">
-        <div class="formulario-container" style="height: auto; padding: 20px; ">
 
-            <h1>Contacto</h1>
+    <?php
+    //Mensajes
+    if(isset($_SESSION['mensaje_exito'])){
+        echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>";
+        echo "<i class='bi bi-check-circle'></i> ".$_SESSION['mensaje_exito'];
+        echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+        echo "</div>";
+        unset($_SESSION['mensaje_exito']);
+    }
+    if(isset($_SESSION['mensaje_error'])){
+        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>";
+        echo "<i class='bi bi-exclamation-circle-fill'></i> ".$_SESSION['mensaje_error'];
+        echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+        echo "</div>";
+        unset($_SESSION['mensaje_error']);
+    }
+    if(isset($_SESSION['mensaje_warning'])){
+        echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>";
+        echo "<i class='bi bi-exclamation-triangle-fill'></i> ".$_SESSION['mensaje_warning'];
+        echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+        echo "</div>";
+        unset($_SESSION['mensaje_warning']);
+    }
+    if(isset($_SESSION['mensaje_info'])){
+        echo "<div class='alert alert-info alert-dismissible fade show' role='alert'>";
+        echo "<i class='bi bi-info-circle-fill'></i> ".$_SESSION['mensaje_info'];
+        echo "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+        echo "</div>";
+        unset($_SESSION['mensaje_info']);
+    }
+    ?>
 
-            <form action="controllers/contactoController.php" method="post">
-                <div class="datos-conteiner">
-                    <label for="nombre">Nombre:</label><br>
-                    <input type="text" id="nombre" name="nombre" required><br>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
 
-                    <label for="email">Email:</label><br>
-                    <input type="email" id="email" name="email" required><br>
+                <h1 class="text-center mb-4">Contacto</h1>
 
-                    <label for="asunto">Asunto:</label><br>
-                    <input type="text" id="asunto" name="asunto" required><br>
-
-                    <label for="mensaje">Mensaje:</label><br>
-                    <textarea id="mensaje" name="mensaje" required></textarea>
-                </div>
-                <input type="submit" name="enviar" value="Enviar" class="button-form">
-                <?php
-
-                // Para mostrar mensajes de éxito o error que vengan del controlador , está bien???
-                if(isset($_SESSION["mensaje_contacto"])){
-                    echo "<p style='color:green; font-weight:bold;'>" . $_SESSION['mensaje_contacto']. "</p>";
-                    unset($_SESSION['mensaje_contacto']);
-                }
-                ?>
-            </form>
+                <form action="controllers/contactoController.php" method="POST" class="p-4 border rounded shadow-sm bg-white">
+                    
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">👤</span>
+                        <input type="text" class="form-control" name="nombre" placeholder="Nombre completo" aria-label="Nombre" aria-describedby="basic-addon1" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="tu@email.com" required>
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">📋</span>
+                        <input type="text" class="form-control" name="asunto" placeholder="Asunto del mensaje" aria-label="asunto" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="mensaje" class="form-label">Mensaje</label>
+                        <textarea class="form-control" name="mensaje" id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg" name="enviar">Enviar Mensaje</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    <?php include("includes/footer.php"); ?>
+
+<?php include("includes/footer.php"); ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
