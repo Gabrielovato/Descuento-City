@@ -53,11 +53,17 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
     </div>
 
     <!-- LOCALES -->
-
     <section class="locales" id="locales">        
         <div class="container">
 
+
             <!-- FALTARIA BUSCADOR. -->
+            <!-- promocionesUsuarios , localesUsuarios , novedaesUsurios tienen que ir en views/auth. Cambiar rutas-->
+
+
+
+
+            
             <h2 class="text-center mb-4">Locales Participantes</h2>
 
         <?php
@@ -75,22 +81,26 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
                     echo '<div class="col">';
                     echo '  <div class="card h-100 shadow-sm">';
                     echo '    <img src="' . htmlspecialchars($rutaImagen) . '" class="card-img-top" alt="Logo ' . htmlspecialchars($local['nombreLocal']) . '" style="height: 200px; object-fit: cover;">';
-                    echo '    <div class="card-body d-flex flex-column">';
+                    echo '    <div class="card-body">';
                     echo '      <h5 class="card-title">' . htmlspecialchars($local['nombreLocal']) . '</h5>';
                     echo '      <p class="card-text">';
                     echo '        <small class="text-muted"><i class="bi bi-geo-alt"></i> ' . htmlspecialchars($local['ubicacionLocal']) . '</small><br>';
-                    echo '        <small class="text-muted"><i class="bi bi-tag"></i> ' . htmlspecialchars($local['rubroLocal']) . '</small><br>';
-                    echo '        <small class="text-muted"><i class="bi bi-tag"></i> #' . htmlspecialchars($local['codLocal']) . '</small>';
+                    echo '        <small class="text-muted"><i class="bi bi-tag"></i> ' . htmlspecialchars($local['rubroLocal']) . '</small>';
                     echo '      </p>';
-                    echo '      <div class="mt-auto">';
-                    echo '        <a href="/Descuento-City/views/locales/localDetalle.php?id=' . $local['codLocal'] . '" class="btn btn-primary btn-sm">Ver promociones</a>';
-                    echo '      </div>';
                     echo '    </div>';
                     echo '  </div>';
                     echo '</div>';
                 }
                 
                 echo '</div>';
+                
+                // Botón "Ver más locales" fuera de las cards
+                echo '<div class="text-center mt-4">';
+                echo '  <a href="/Descuento-City/localesUsuarios.php" class="btn btn-primary btn-lg">';
+                echo '    Ver más locales <i class="bi bi-arrow-right ms-2"></i>';
+                echo '  </a>';
+                echo '</div>';
+                
             } else { 
                 echo '<div class="text-center">';
                 echo '  <p class="text-muted">No hay locales disponibles en este momento.</p>';
@@ -98,7 +108,6 @@ $resultado_locales = mysqli_query($conexion, $sql_locales);
             }?>
         </div>
     </section>
-
 
     <!-- PROMOCIONES Y NOVEDADES. Solo son dos card con un boton que diga ver mas y lo mande a promociones o novedades.-->
     <!-- Faltaria agregarle una imagen de fondo -->
