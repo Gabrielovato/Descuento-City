@@ -216,7 +216,8 @@ if (!$resultado_promos) {
         <div class="col-lg-8">
             <form class="row" method="POST">
                 <div class="col-md-6 mb-2">
-                    <select name="local" class="form-select">
+                    <label for="filtro_local" class="form-label">Buscar por local</label>
+                    <select name="local" id="filtro_local" class="form-select">
                         <option value="" hidden selected>Buscar por local</option>
                         <option value="">Todos los locales</option>
                         <?php 
@@ -232,7 +233,8 @@ if (!$resultado_promos) {
                 </div>
 
                 <div class="col-md-6 mb-2">
-                    <select name="categoria" class="form-select">
+                    <label for="filtro_categoria" class="form-label">Buscar por categoría</label>
+                    <select name="categoria" id="filtro_categoria" class="form-select">
                         <option value="" hidden selected>Buscar por categoría</option>
                         <option value="">Todas las categorías</option>
                         <?php 
