@@ -81,19 +81,28 @@ $breadcrumb_titulo_activo = 'Registro';
 
                 <form action="../../controllers/registroController.php" method="POST" class="p-4 border rounded shadow-sm bg-white">
                     
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                        <input type="email" class="form-control" name="email" placeholder="example@gmail.com" aria-label="Email" required>
+                    <div class="mb-3">
+                        <label for="reg_email" class="form-label">Email</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                            <input type="email" class="form-control" name="email" id="reg_email" placeholder="example@gmail.com" required>
+                        </div>
                     </div>
                     
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                        <input type="password" class="form-control" name="clave" placeholder="Contraseña" aria-label="Contraseña" required>
+                    <div class="mb-3">
+                        <label for="reg_clave" class="form-label">Contraseña</label>
+                        <div class="input-group">                       
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                            <input type="password" class="form-control" name="clave" id="reg_clave" placeholder="Contraseña" required>
+                        </div>
                     </div>
                     
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                        <input type="password" class="form-control" name="claveConfirm" placeholder="Confirmar contraseña" aria-label="Confirmar Contraseña" required>
+                    <div class="mb-3">
+                        <label for="reg_claveConfirm" class="form-label">Confirmar Contraseña</label>
+                        <div class="input-group">             
+                            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                            <input type="password" class="form-control" name="claveConfirm" id="reg_claveConfir" placeholder="Confirmar Contraseña" required>
+                        </div>
                     </div>
                     
                     <div class="mb-3">

@@ -20,7 +20,7 @@ include("../../conexionBD.php");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/Descuento-City/assets/css/estilos.css">
     <title>Mis Promociones Usadas - Cliente</title>
-    <link rel="icon" type="image/png" href="/Descuento-City/assets/img/logo-ventana/logo-fondo-b-circular.png"/>
+    <link rel="icon" type="image/png" href="/Descuento-City/assets/img/logo-ventana/logo-fondo-b-circular.png" alt="logo de la pagina"/>
 </head>
 <body>
     <?php include("../../includes/navbar.php");?>

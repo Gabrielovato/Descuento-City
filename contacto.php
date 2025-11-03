@@ -19,7 +19,7 @@ $breadcrumb_titulo_activo = 'Contacto';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <title>Contacto - Descuento City</title>
-    <link rel="icon" type="image/png" href="/Descuento-City/assets/img/logo-ventana/logo-fondo-b-circular.png"/>
+    <link rel="icon" type="image/png" href="/Descuento-City/assets/img/logo-ventana/logo-fondo-b-circular.png" alt="logo de la pagina"/>
 </head>
 <body>
 
@@ -97,9 +97,12 @@ if ($usuario_logueado && $tipo_usuario) {
 
                 <form action="controllers/contactoController.php" method="POST" class="p-4 border rounded shadow-sm bg-white">
                     
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">👤</span>
-                        <input type="text" class="form-control" name="nombre" placeholder="Nombre completo" aria-label="Nombre" aria-describedby="basic-addon1" required>
+                    <div class="mb-3">
+                        <label for="contacto_nombre" class="form-label">Nombre completo</label>
+                        <div class="input-group">    
+                            <span class="input-group-text" id="basic-addon1">👤</span>
+                            <input type="text" class="form-control" name="nombre" id="contacto_nombre" placeholder="Nombre completo" aria-label="Nombre" aria-describedby="basic-addon1" required>
+                        </div>
                     </div>
                     
                     <div class="mb-3">
@@ -107,9 +110,12 @@ if ($usuario_logueado && $tipo_usuario) {
                         <input type="email" class="form-control" name="email" id="email" placeholder="tu@email.com" required>
                     </div>
                     
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">📋</span>
-                        <input type="text" class="form-control" name="asunto" placeholder="Asunto del mensaje" aria-label="asunto" required>
+                    <div class="mb-3">
+                        <label for="contacto_asunto" class="form-label">Asunto del mensaje</label>
+                        <div class="input-group">
+                            <span class="input-group-text">📋</span>
+                            <input type="text" class="form-control" name="asunto" id="contacto_asunto" placeholder="Asunto del mensaje" aria-label="asunto" required>
+                        </div>
                     </div>
                     
                     <div class="mb-3">
